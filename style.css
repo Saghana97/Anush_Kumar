@@ -180,11 +180,13 @@ ul{
 .top-nav-sticky{
     background: #fff;
     position: fixed;
+    top: -70px;
     padding: 10px 75.5px;
     z-index: 10;
     width: 100%;
     box-shadow: 0 1px 7px 0 rgba(0,0,0,.4);
     display: flex;
+    transition: all 0.3s;
 }
 .margin-sticky{
     margin-right: 25px;
@@ -239,6 +241,10 @@ ul{
     padding: 2px 5px;
     font-size: 12px;
     border-radius: 10px;
+}
+.logo-flights-text-normal i{
+    padding: 2.5px;
+    font-weight: 900;
 }
 .logo-villas{
     display: inline-block;
@@ -347,4 +353,8 @@ ul{
     font-size: 0px;
     margin-bottom: 2px;
     margin-left: 5px;
+}
+.more-adjust{
+    position: relative;
+    left: 5px;
 }
