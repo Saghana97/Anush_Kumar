@@ -635,7 +635,7 @@ ul{
     padding: 50px 20px 0;
 }
 .flight-booking{
-    
+    padding-bottom: 10px;
 }
 .flight-booking ul{
     display: flex;
@@ -675,4 +675,308 @@ ul{
 .flight-booking-li-right{
     margin-left: auto;
     font-weight: bold;
+}
+.booking-content{
+}
+.booking-content-inside{
+    position: relative;
+    width: 100%;
+    margin: 0 auto 20px;
+    display: flex;
+    border: solid 1px #e7e7e7;
+    border-radius: 10px;
+}
+.booking-content-inside div{
+    transition: all 0.5s;
+}
+.booking-content-inside div:hover{
+    background-color: #eaf5ff;
+}
+.booking-content-inside-1{
+    cursor: pointer;
+    padding: 10px 20px;
+    width: 259px;
+    display: flex;
+    flex-direction: column;
+    border-right: solid 1px #e7e7e7;
+}
+.inside-1-span{
+    text-transform: uppercase;
+    color: #4a4a4a;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 5px;
+    display: flex;
+}
+.inside-1-input{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    font-weight: bolder;
+    font-family: 'Lato', sans-serif;
+    background-color: transparent;
+}
+.inside-1-p{
+    padding: 0;
+    margin: 0;
+    width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.booking-content-inside-2{
+    cursor: pointer;
+    padding: 10px 10px 10px 35px;
+    width: 259px;
+    display: flex;
+    flex-direction: column;
+    border-right: solid 1px #e7e7e7;
+}
+.toggle-arrow{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    margin-left: -22px;
+    border-radius: 100%;
+    background: #fff;
+    display: flex;
+    position: absolute;
+    top: 25px;
+    left: 25%;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+.toggle-img{
+    background: url("Assets/Icons/landingSprite@5x.png") no-repeat;
+    display: inline-block;
+    width: 15px;
+    height: 11px;
+    background-position: -149px -111px;
+    background-size: 200px 550px;
+    font-size: 0px;
+}
+.departure-content{
+    cursor: pointer;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: solid 1px #e7e7e7;
+}
+.departure-content i{
+    padding-left: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #008cff;
+}   
+.departure-content p{
+    margin: 0;
+    padding: 0;
+}
+.date-style{
+    color: #000;
+    font-size: 20px;
+    font-weight: 590;
+}
+.large-date{
+    font-weight: 800;
+    font-size: 30px;
+    padding-right: 5px;
+    color: #000;
+}
+.return-content{
+    cursor: pointer;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: solid 1px #e7e7e7;
+}
+.return-content i{
+    padding-left: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #008cff;
+}
+.return-style{
+    margin: 0;
+    color: #9b9b9b;
+    font-weight: bolder;
+    width: 153px; 
+}
+.traveller-class-content{
+    cursor: pointer;
+    padding: 10px 20px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.traveller-class-content i{
+    padding-left: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #008cff;
+}
+.traveller-class-content p{
+    margin: 0;
+}
+.fare-content{
+    display: flex;
+    margin-bottom: 20px;
+}
+.fare-content ul{
+    display: flex;
+    padding-right: 20px;
+    width: fit-content;
+    border-right: 1px solid rgba(0, 0, 0, 0.192);
+}
+.fare-content li{
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 10px 10px;
+    border-radius: 3px;
+    background-color: #008cff;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.fare-content li:last-child{
+    margin: 0 5px;
+    padding: 10px 10px;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #000;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.trending{
+    padding-left: 10px;
+    display: flex;    
+}
+.trending p{
+    padding-top: 10px;
+    font-size: 12px;
+    font-weight: 800;
+    margin: 0;
+}
+.trending ul{
+    display: flex;
+    padding-right: 20px;
+    border: none;
+}
+.trending li{
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 10px 10px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    color: #4a4a4a;
+    font-size: 12px;
+    font-weight: 100;
+    text-transform: none;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.trending li:last-child{
+    margin: 0 5px;
+    padding: 10px 10px;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    color: #4a4a4a;
+    font-size: 12px;
+    font-weight: 100;
+    text-transform: none;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.arrow{
+    width: 10px;
+    height: 8px;
+    background: url("Assets/Icons/landingSprite@5x.png") no-repeat;
+    display: inline-block;
+    background-size: 200px 550px;
+    background-position: -48px -495px;
+    font-size: 0px;
+}
+.search-btn{
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 25px;
+    font-weight: 800;
+    border-radius: 34px;
+    font-family: 'Lato',sans-serif;
+    background-image: linear-gradient(96deg, #53b2fe, #065af3);
+    z-index: 10;
+    position: relative;
+    top: -30px;
+    left: 40%;
+    padding: 5px 60px;
+}
+.side-sticky-nav{
+    position: absolute;
+    top: 35%;
+    left: -10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 11;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.side-sticky-nav li{
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-left: 25px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    background-color:#fff;
+}
+.side-sticky-nav li:hover{
+    background-color:#eaf5ff;
+}
+.search-li-1{
+    width: 18px;
+    height: 18px;
+    background: url("Assets/Icons/landingSprite@5x.png") no-repeat;
+    display: inline-block;
+    background-size: 200px 550px;
+    font-size: 0px;
+    background-position: -43px -39px;
+}
+.search-li-2{
+    width: 18px;
+    height: 18px;
+    background: url("Assets/Icons/landingSprite@5x.png") no-repeat;
+    display: inline-block;
+    background-size: 200px 550px;
+    font-size: 0px;
+    background-position: -9px -240px;
+}.search-li-3{
+    width: 18px;
+    height: 18px;
+    background: url("Assets/Icons/landingSprite@5x.png") no-repeat;
+    display: inline-block;
+    background-size: 200px 550px;
+    font-size: 0px;
+    background-position: -7px -455px;
+}
+.search-li-1-hover{
+    display: none;
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: teal;
+    left: 60px;
+    top: 36%;
+    z-index: 11;
+}
+.search-li-1-hover p{
+    margin:0;
 }
