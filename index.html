@@ -58,17 +58,24 @@
                         <li><a href="#"><span class="header-logo-cabs"></span><span class="header-logo-flights-text-normal">Cabs</span></a></li>
                         <li><a href="#"><span class="header-logo-visa header-visa-adjust"></span><span class="header-logo-flights-text-normal">Visa</span></a></li>
                         <li><a href="#"><span class="header-logo-gift header-gift-adjust"></span><span class="header-logo-flights-text-normal">Giftcards</span></a></li>
-                        <li><a href="#"><span class="header-logo-more header-adjust-more"></span><span style="display:flex" class="header-logo-flights-text-normal ">More<i class="fa fa-angle-down"></i></span></a></li>
+                        <li id="more-hover-btn"><a href="#"><span class="header-logo-more header-adjust-more"></span><span style="display:flex" class="header-logo-flights-text-normal ">More<i class="fa fa-angle-down"></i></span></a></li>
                     </ul>
+                </div>
+                <div id="more-hover" class="more-hover-content">
+                    <a href="#">My Biz</a>
+                    <a href="#">International Flights</a>
+                    <a href="#">International Hotels</a>
+                    <a href="#">Deals</a>
+                    <a href="#">Blogs</a>
                 </div>
             </div>
             <div class="middle-content">
                 <div class="middle-content-inside">
                     <div class="flight-booking">
                         <ul>
-                            <li class="flight-booking-li"><span class="flight-booking-span"></span>&nbsp oneway</li>
-                            <li class="flight-booking-li"><span class="flight-booking-span"></span>&nbsp twoway</li>
-                            <li class="flight-booking-li"><span class="flight-booking-span"></span>&nbsp multicity</li>
+                            <li id="oneway-click" class="flight-booking-li"><span id="oneway-click-span" class="flight-booking-span"></span>&nbsp oneway</li>
+                            <li id="twoway-click" class="flight-booking-li-1"><span id="twoway-click-span" class="flight-booking-span-1"></span>&nbsp twoway</li>
+                            <li id="multicity-click" class="flight-booking-li-1"><span id="multicity-click-span" class="flight-booking-span-1"></span>&nbsp multicity</li>
                             <li class="flight-booking-li-right">Book Domestic and International flights</li>
                         </ul>
                     </div>
@@ -102,8 +109,8 @@
                         </div>
                         <div class="fare-content">
                             <ul>
-                                <li>Regular Fare</li>
-                                <li>Student Fare</li>
+                                <li id="regular-fare-btn" class="fare-content-li">Regular Fare</li>
+                                <li id="student-fare-btn" class="fare-content-li-1">Student Fare</li>
                             </ul>
                             <div class="trending">
                                 <p>Trending Searches:</p>
@@ -123,16 +130,35 @@
                 <li id="li-1"><span class="search-li-1"></span></li>
                 <li id="li-2"><span class="search-li-2"></span></li>
                 <li id="li-3"><span class="search-li-3"></span></li>
+                <li id="li-4"><span class="search-li-4"></span></li>
             </ul>
             <div id="hover-1" class="search-li-1-hover">
-                <p>Click to go to search widget</p>
+                <p>Click to go to <b>search widget</b></p>
             </div>
-            <div id="hover-2" class="search-li-1-hover">
-                <p>Click to scroll to all available offers</p>
+            <div id="hover-2" class="search-li-2-hover">
+                <p>Click to scroll to all <b>available offers</b></p>
             </div>
-            <div id="hover-3" class="search-li-1-hover">
-                <p>Click to scroll to your promotions and offers</p>
+            <div id="hover-3" class="search-li-3-hover">
+                <p>Click to scroll to your <b>promotions and offers</b></p>
             </div>
+            <div id="hover-4" class="search-li-4-hover">
+                <p>Click to scroll to compare your <b>flight prices</b></p>
+            </div>
+            <div class="super-offers-margin">
+                <div class="super-offers">
+                    <div class="super-offers-head">
+                        <h2 class="super-offers-h2">Super Offers</h2>
+                        <div>
+                            <ul class="super-offers-head-ul">
+                                <li class="super-offers-head-li">All Offers</li>
+                                <li class="super-offers-head-li-1">Bank Offers</li>
+                                <li class="super-offers-head-li-1">Domestic Hotels</li>
+                                <li class="super-offers-head-li-1">More <i class="fa fa-angle-down"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>  
         </div>
     </div>
     <script src="script.js"></script>

@@ -44,7 +44,6 @@ s_year.innerHTML = cur_date.getUTCFullYear().toString().substr(2);
 s_month.innerHTML = month_arr[cur_date.getUTCMonth()];
 
 //hover @ sticky side nav
-
 document.getElementById("li-1").addEventListener("mouseover",function(){
     document.getElementById("hover-1").style.display = "block";
 });
@@ -63,3 +62,80 @@ document.getElementById("li-3").addEventListener("mouseover",function(){
 document.getElementById("li-3").addEventListener("mouseleave",function(){
     document.getElementById("hover-3").style.display = "none";
 });
+document.getElementById("li-4").addEventListener("mouseover",function(){
+    document.getElementById("hover-4").style.display = "block";
+});
+document.getElementById("li-4").addEventListener("mouseleave",function(){
+    document.getElementById("hover-4").style.display = "none";
+});
+//way button toggle
+document.getElementById("oneway-click").addEventListener("click",function(){
+    document.getElementById("oneway-click").classList.remove("flight-booking-li-1");
+    document.getElementById("oneway-click").classList.add("flight-booking-li");
+    document.getElementById("twoway-click").classList.remove("flight-booking-li");
+    document.getElementById("twoway-click").classList.add("flight-booking-li-1");
+    document.getElementById("multicity-click").classList.remove("flight-booking-li-1");
+    document.getElementById("multicity-click").classList.add("flight-booking-li-1");
+
+
+    document.getElementById("oneway-click-span").classList.remove("flight-booking-span-1");
+    document.getElementById("oneway-click-span").classList.add("flight-booking-span");
+    document.getElementById("twoway-click-span").classList.remove("flight-booking-span");
+    document.getElementById("twoway-click-span").classList.add("flight-booking-span-1");
+    document.getElementById("multicity-click-span").classList.remove("flight-booking-span");
+    document.getElementById("multicity-click-span").classList.add("flight-booking-span-1");
+});
+document.getElementById("twoway-click").addEventListener("click",function(){
+    document.getElementById("oneway-click").classList.remove("flight-booking-li");
+    document.getElementById("oneway-click").classList.add("flight-booking-li-1");
+    document.getElementById("twoway-click").classList.remove("flight-booking-li-1");
+    document.getElementById("twoway-click").classList.add("flight-booking-li");
+    document.getElementById("multicity-click").classList.remove("flight-booking-li");
+    document.getElementById("multicity-click").classList.add("flight-booking-li-1");
+
+    document.getElementById("oneway-click-span").classList.remove("flight-booking-span");
+    document.getElementById("oneway-click-span").classList.add("flight-booking-span-1");
+    document.getElementById("twoway-click-span").classList.remove("flight-booking-span-1");
+    document.getElementById("twoway-click-span").classList.add("flight-booking-span");
+    document.getElementById("multicity-click-span").classList.remove("flight-booking-span");
+    document.getElementById("multicity-click-span").classList.add("flight-booking-span-1");
+});
+document.getElementById("multicity-click").addEventListener("click",function(){
+    document.getElementById("oneway-click").classList.remove("flight-booking-li");
+    document.getElementById("oneway-click").classList.add("flight-booking-li-1");
+    document.getElementById("twoway-click").classList.remove("flight-booking-li");
+    document.getElementById("twoway-click").classList.add("flight-booking-li-1");
+    document.getElementById("multicity-click").classList.remove("flight-booking-li-1");
+    document.getElementById("multicity-click").classList.add("flight-booking-li");   
+
+    document.getElementById("oneway-click-span").classList.remove("flight-booking-span");
+    document.getElementById("oneway-click-span").classList.add("flight-booking-span-1");
+    document.getElementById("twoway-click-span").classList.remove("flight-booking-span");
+    document.getElementById("twoway-click-span").classList.add("flight-booking-span-1");
+    document.getElementById("multicity-click-span").classList.remove("flight-booking-span-1");
+    document.getElementById("multicity-click-span").classList.add("flight-booking-span"); 
+});
+
+//fare button toggle
+document.getElementById("regular-fare-btn").addEventListener("click",function(){
+    document.getElementById("regular-fare-btn").classList.add("fare-content-li");
+    document.getElementById("regular-fare-btn").classList.remove("fare-content-li-1");
+
+    document.getElementById("student-fare-btn").classList.remove("fare-content-li");
+    document.getElementById("student-fare-btn").classList.add("fare-content-li-1");
+});
+document.getElementById("student-fare-btn").addEventListener("click",function(){
+    document.getElementById("student-fare-btn").classList.remove("fare-content-li-1");
+    document.getElementById("student-fare-btn").classList.add("fare-content-li");
+
+    document.getElementById("regular-fare-btn").classList.remove("fare-content-li-1");
+    document.getElementById("regular-fare-btn").classList.add("fare-content-li-1");
+});
+
+//more hover
+document.getElementById("more-hover-btn").addEventListener("mouseover",function(){
+    document.getElementById("more-hover").style.zIndex="11";
+})
+document.getElementById("more-hover").addEventListener("mouseleave",function(){
+    document.getElementById("more-hover").style.zIndex="-1";
+})

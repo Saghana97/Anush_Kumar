@@ -10,14 +10,8 @@ html,body{
 .bg-gradient {
     background: #f2f2f2;
     background-repeat: no-repeat;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#051322), to(#15457c));
-    background-image: -webkit-linear-gradient(top, #051322, #15457c);
-    background-image: -moz-linear-gradient(top, #051322, #15457c);
-    background-image: -o-linear-gradient(top, #051322, #15457c);
     background-image: linear-gradient(to bottom, #051322, #15457c);
-    -webkit-background-size: 100% 454px;
-    -moz-background-size: 100% 454px;
-    background-size: 100% 454px;
+    background-size: 100% 474px;
     min-height: 100vh;
 }
 .top-nav{
@@ -620,12 +614,35 @@ ul{
     position: relative;
     left: 3px;
 }
+.more-hover-content{
+    position: absolute;
+    background-color: white;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    top: 90%;
+    right: 70px;
+    padding: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.1);
+}
+.more-hover-content a{
+    text-decoration: none;
+    font-size: 16px;
+    color: #000;
+    font-weight: 800;
+    margin: 5px 0;
+    padding: 8px 40px;
+    font-family: 'Lato', sans-serif;
+}
+.more-hover-content a:hover{
+    background-color: #eaf5ff;
+}
 .middle-content{
     margin: 0 75.5px;
     margin-top: 80px !important;
 }
 .middle-content-inside{
-    width: 1200px;
     margin: 0 auto;
     position: relative;
     z-index: 10;
@@ -641,6 +658,7 @@ ul{
     display: flex;
 }
 .flight-booking-li{
+    cursor: pointer;
     display: flex;
     padding: 3px 5px;
     border-radius: 10px;
@@ -649,6 +667,17 @@ ul{
     align-items: center;
     margin: 0 10px;
     color: #000;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+.flight-booking-li-1{
+    cursor: pointer;
+    display: flex;
+    padding: 3px 5px;
+    border-radius: 10px;
+    color: #9b9b9b;
+    align-items: center;
+    margin: 0 10px;
     text-transform: uppercase;
     font-weight: bolder;
 }
@@ -672,11 +701,26 @@ ul{
     margin-bottom: 1px;
     margin-right: 1px;
 }
+.flight-booking-span-1{
+    display: flex;
+    cursor: pointer;
+    padding: 2px 3px;
+    border-radius: 20px;
+    border: 1px solid #9b9b9b;
+}
+.flight-booking-span-1::after{
+    content: '';
+    display: block;
+    width: 3px;
+    height: 6px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-bottom: 1px;
+    margin-right: 1px;
+}
 .flight-booking-li-right{
     margin-left: auto;
     font-weight: bold;
-}
-.booking-content{
 }
 .booking-content-inside{
     position: relative;
@@ -833,7 +877,7 @@ ul{
     width: fit-content;
     border-right: 1px solid rgba(0, 0, 0, 0.192);
 }
-.fare-content li{
+.fare-content-li{
     cursor: pointer;
     margin: 0 5px;
     padding: 10px 10px;
@@ -845,7 +889,8 @@ ul{
     text-transform: uppercase;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
 }
-.fare-content li:last-child{
+.fare-content-li-1{
+    cursor: pointer;
     margin: 0 5px;
     padding: 10px 10px;
     border-radius: 3px;
@@ -905,6 +950,7 @@ ul{
 }
 .search-btn{
     cursor: pointer;
+    outline: none;
     border: none;
     color: #fff;
     text-transform: uppercase;
@@ -921,7 +967,7 @@ ul{
 }
 .side-sticky-nav{
     position: absolute;
-    top: 35%;
+    top: 37%;
     left: -10px;
     display: flex;
     flex-direction: column;
@@ -957,7 +1003,8 @@ ul{
     background-size: 200px 550px;
     font-size: 0px;
     background-position: -9px -240px;
-}.search-li-3{
+}
+.search-li-3{
     width: 18px;
     height: 18px;
     background: url("Assets/Icons/landingSprite@5x.png") no-repeat;
@@ -966,17 +1013,118 @@ ul{
     font-size: 0px;
     background-position: -7px -455px;
 }
+.search-li-4{
+    width: 23px;
+    height: 18px;
+    background: url("Assets/Icons/landingSprite@5x.png") no-repeat;
+    display: inline-block;
+    background-size: 200px 550px;
+    font-size: 0px;
+    background-position: -7px -40px;
+}
 .search-li-1-hover{
     display: none;
     position: absolute;
     padding: 10px;
     border-radius: 5px;
     color: #fff;
+    width: 200px;
     background-color: teal;
     left: 60px;
-    top: 36%;
+    top: 38%;
     z-index: 11;
 }
 .search-li-1-hover p{
     margin:0;
+}
+.search-li-2-hover{
+    display: none;
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    width: 200px;
+    background-color: teal;
+    left: 60px;
+    top: 46%;
+    z-index: 11;
+}
+.search-li-2-hover p{
+    margin:0;
+}
+.search-li-3-hover{
+    display: none;
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    width: 200px;
+    background-color: teal;
+    left: 60px;
+    top: 54%;
+    z-index: 11;
+}
+.search-li-3-hover p{
+    margin:0;
+}
+.search-li-4-hover{
+    display: none;
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    width: 200px;
+    background-color: teal;
+    left: 60px;
+    top: 62%;
+    z-index: 11;
+}
+.search-li-4-hover p{
+    margin:0;
+}
+/*split file*/
+.super-offers-margin{
+    margin: 0 75.5px;
+}
+.super-offers{
+    border-radius: 10px;
+    box-shadow: 0 3px 30px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 25px 40px 40px;
+}
+.super-offers-head{
+    display: flex;
+}
+.super-offers-h2{
+    margin: 0;
+    font-size: 40px;
+    font-weight: 800;
+}
+.super-offers-head-ul{
+    display: flex;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+.super-offers-head-li{
+    padding: 5px;
+    margin-right: 20px;
+    color: #008cff;
+    border-bottom: solid 3px #008cff;
+    transition: all 0.2s linear;
+    position: relative;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    cursor: pointer;
+}
+.super-offers-head-li-1{
+    padding: 5px;
+    margin-right: 20px;
+    border-bottom: solid 3px #fff;
+    transition: all 0.2s linear;
+    position: relative;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    cursor: pointer;
 }
