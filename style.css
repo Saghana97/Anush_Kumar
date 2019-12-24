@@ -1,0 +1,115 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+a{
+    margin: 0;
+}
+.top-nav{
+    position: relative;
+    margin-left: auto;
+    width: 1260px;
+    display: flex;
+    padding: 5px 60px 5px 0px;
+    background-color: #fff;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.margin-left-content{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+.bell-icon{
+    cursor: pointer;
+    margin-right: 40px;
+}
+.bell-icon i{
+    font-size: 25px;
+    color: #3f414d;
+}
+.top-nav-logo{
+    height: 50px;
+    width: 260px;
+}
+.top-nav-left{
+    display: flex;
+    align-items: center;
+}
+.top-nav-left i{
+    cursor: pointer;
+    margin-left: 5px;
+    color: #3f414da2; 
+}
+.top-nav-left-img{
+    cursor: pointer;
+    border-radius: 50%;
+    height: 40px;
+    margin-right: 10px;
+}
+.top-nav-left-p{
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #3f414da2;
+}
+.side-nav{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    width: 50px;
+    height: 100%;
+    border-right: .5px solid #8c8d9462;
+    text-align: center;
+    overflow: hidden;
+}
+.side-nav-img{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-left: 3px solid white;
+    transition: all 0.5s;
+}
+.side-nav-img:hover{
+    background-color: pink;
+    border-left: 3px solid deeppink;
+}
+.side-nav-img img{
+    height: 20px;
+}
+.side-nav-inside{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 100%;
+}
+.margin-side-nav{
+    height: 200px;
+}
+.side-nav-inside img{
+    cursor: pointer;
+    height: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-left: 3px solid white;
+    transition: all 0.5s;
+}
+.side-nav-inside img:hover{
+    background-color: pink;
+    border-left: 3px solid deeppink;
+}
+.middle-content{
+    margin-left: 50px;
+    height: 100%;
+}
+.middle-content p{
+    margin: 0;
+    color: rgba(3, 2, 26, 0.5);
+    font-size: 14px;
+    font-weight: 600;
+}
+.middle-content-1{
+    
+}
