@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha256-8zyeSXm+yTvzUN1VgAOinFgaVFEFTyYzWShOy9w7WoQ=" crossorigin="anonymous"></script>
 </head>
-<body>
-    <div class="main">
+<body id="main">
+    <div  class="main">
         <div class="top-nav">
             <a href="#"><img class="top-nav-logo" src="Assets/icon/NykaaLogoSvg.svg" alt=""></a>
             <div class="margin-left-content">
@@ -60,14 +61,121 @@
                 <a class="clear-all-a" href="#">Clear all</a>
             </div>
             <div class="graph-section">
-                <i>Showing the top five products in the charts.</i>
-                <div class="graph-section-inside">
+                <i class="small">Showing the top five products in the charts.</i>
+                <div id="graph-sec" class="graph-section-inside">
                     <div class="graph-1">
                         <div class="graph-1-top">
                             <p class="graph-1-top-p">MRP Sales: <span>₹97,500</span></p>
-                            <p>January</p>
+                            <span class="calender-change">
+                                <i class="fa fa-angle-left"></i>
+                                <p>January</p>
+                                <i class="fa fa-angle-right"></i>
+                            </span>
                         </div>
-                        <p></p>
+                        <div class="graph-canvas"><canvas id="myChart" width="100" height="100" ></canvas></div>
+                    </div>
+                    <div class="graph-1">
+                        <div class="graph-1-top">
+                            <p class="graph-1-top-p">Subtotal Sales: <span>₹70,000</span></p>
+                            <span class="calender-change">
+                                <i class="fa fa-angle-left"></i>
+                                <p>January</p>
+                                <i class="fa fa-angle-right"></i>
+                            </span>
+                        </div>
+                        <div class="graph-canvas"><canvas id="myChart2" width="100" height="100" ></canvas></div>
+                    </div>
+                    <div class="graph-1">
+                        <div class="graph-1-top">
+                            <p class="graph-1-top-p">Total Units Sold: <span>3600</span></p>
+                            <span class="calender-change">
+                                <i class="fa fa-angle-left"></i>
+                                <p>January</p>
+                                <i class="fa fa-angle-right"></i>
+                            </span>
+                        </div>
+                        <div class="graph-canvas"><canvas id="myChart3" width="100" height="100" ></canvas></div>
+                    </div>
+                    <div class="graph-1">
+                        <div class="graph-1-top">
+                            <p class="graph-1-top-p">No. of Orders: <span>400</span></p>
+                            <span class="calender-change">
+                                <i class="fa fa-angle-left"></i>
+                                <p>January</p>
+                                <i class="fa fa-angle-right"></i>
+                            </span>
+                        </div>
+                        <div class="graph-canvas"><canvas id="myChart4" width="100" height="100" ></canvas></div>
+                    </div>
+                    <div class="graph-1">
+                        <div class="graph-1-top">
+                            <p class="graph-1-top-p">MRP Sales: <span>₹97,500</span></p>
+                            <span class="calender-change">
+                                <i class="fa fa-angle-left"></i>
+                                <p>January</p>
+                                <i class="fa fa-angle-right"></i>
+                            </span>
+                        </div>
+                        <div class="graph-canvas"><canvas id="myChart5" width="100" height="100" ></canvas></div>
+                    </div>
+                </div>
+                <button id="graph-btn-right" class="graph-next-btn"><i class="fa fa-angle-right"></i></button>
+                <button id="graph-btn-left" class="graph-next-btn-left"><i class="fa fa-angle-left"></i></button>
+            </div>
+            <div class="table-data">
+                <button id="ins-btn" class="insert-btn"><img id="plus-img" class="middle-content-3-btn-filter-img" src="Assets/icon/plus-sign.svg" alt=""></button>
+                <div></div>
+                <table id="table" class="table-white">
+                    <thead>
+                        <th>products (sku)</th>
+                        <th>mrp sales</th>
+                        <th>subtotal sales</th>
+                        <th>units sold</th>
+                        <th>avg. sales price</th>
+                        <th>no. of orders</th>
+                        <th>avg. order value</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total</td>
+                            <td>₹12345</td>
+                            <td>₹12345</td>
+                            <td>3600</td>
+                            <td>₹130067</td>
+                            <td>800</td>
+                            <td>₹1234</td>
+                        </tr>
+                        <tr>
+                            <td>MAC Makeup 101 kit</td>
+                            <td>₹97500</td>
+                            <td>₹97500</td>
+                            <td>2800</td>
+                            <td>₹1300</td>
+                            <td>64</td>
+                            <td>₹1300</td>
+                        </tr>
+                        <tr>
+                            <td>Bobby Brown - Cream White</td>
+                            <td>₹97500</td>
+                            <td>₹97500</td>
+                            <td>800</td>
+                            <td>₹1300</td>
+                            <td>64</td>
+                            <td>₹1300</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="modal-box" class="modal-input">
+                    <button id="close-btn" class="close-btn"><img id="plus-img" class="middle-content-3-btn-filter-img" src="Assets/icon/plus-sign.svg" alt=""></button>
+                    <input id="input1" type="text" placeholder="Products">
+                    <input id="input2" type="text" placeholder="MRP Sales">
+                    <input id="input3" type="text" placeholder="Subtotal Sales">
+                    <input id="input4" type="text" placeholder="Units Sold">
+                    <input id="input5" type="text" placeholder="Avg. Sales Price">
+                    <input id="input6" type="text" placeholder="No. of Orders">
+                    <input id="input7" type="text" placeholder="Avg. Order Value">
+                    <div style="margin-top: 10px;">
+                        <button id="add-btn" class="insert-btn">Add</button>
                     </div>
                 </div>
             </div>
