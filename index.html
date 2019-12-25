@@ -9,33 +9,47 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha256-8zyeSXm+yTvzUN1VgAOinFgaVFEFTyYzWShOy9w7WoQ=" crossorigin="anonymous"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
 </head>
 <body id="main">
     <div  class="main">
-        <div class="top-nav">
-            <a href="#"><img class="top-nav-logo" src="Assets/icon/NykaaLogoSvg.svg" alt=""></a>
+        <div id="notify-content" class="notification-popup">
+            <ul class="notification-popup-ul">
+                <li class="notification-popup-li">Bills pending!</li>
+                <li class="notification-popup-li">Order live.</li>
+                <li class="notification-popup-li">Return Active.</li>
+            </ul>
+        </div>
+        <div id="user-content" class="user-popup">
+            <ul class="user-popup-ul">
+                <li class="user-popup-li">Settings</li>
+                <li class="user-popup-li">Log out</li>
+            </ul>
+        </div>
+        <div id="top-nav" class="top-nav">
+            <img id="sidenav-lock" src="Assets/icon/list.svg" alt="menu">
+            <img id="sidenav-lock-close" src="Assets/icon/plus-sign.svg" alt="menu">
             <div class="margin-left-content">
-                <span class="bell-icon"><i class="fa fa-bell"></i></span>
+                <span id="notify" class="bell-icon"><i class="fa fa-bell"></i><span id="notify-nos" class="notification-nos">3</span></span>
                 <div class="top-nav-left">
                     <img class="top-nav-left-img" src="Assets/icon/style-women.png" alt="">
                     <p class="top-nav-left-p">Mollie Patrawan</p>
-                    <i class="fa fa-caret-down"></i>
+                    <i id="user" class="fa fa-caret-down"></i>
                 </div>
             </div>
         </div>
-        <div class="side-nav">
-            <div class="side-nav-img"><img src="Assets/icon/list.svg" alt="menu"></div>
+        <div id="side-nav-hover" class="side-nav">
+            <a href="#"><img id="nykaa-img" class="top-nav-logo" src="Assets/icon/Nykaa-small.png" alt=""></a>
             <div class="margin-side-nav">
                 <div class="side-nav-inside">
-                    <img src="Assets/icon/menu.svg" alt="">
-                    <img src="Assets/icon/two-users.svg" alt="">
-                    <img src="Assets/icon/wallet.svg" alt="">
-                    <img src="Assets/icon/envelope.svg" alt="">
+                    <div class="side-nav-inside-div"><img src="Assets/icon/menu.svg" alt=""><p>Menu</p></div>
+                    <div class="side-nav-inside-div"><img src="Assets/icon/two-users.svg" alt=""><p>Connections</p></div>
+                    <div class="side-nav-inside-div"><img src="Assets/icon/wallet.svg" alt=""><p>Wallet</p></div>
+                    <div class="side-nav-inside-div"><img src="Assets/icon/envelope.svg" alt=""><p>Mail</p></div>
                 </div>
             </div>
         </div>
-        <div class="middle-content">
+        <div id="middle-content" class="middle-content">
             <div class="middle-content-1"><p>Breadcrumb 1 &middot; Current Breadcrumb</p></div>
             <div class="middle-content-2">
                 <ul class="middle-content-2-btn">
@@ -129,44 +143,44 @@
                 <table id="table" class="table-white">
                     <thead>
                         <th>products (sku)</th>
-                        <th>mrp sales</th>
-                        <th>subtotal sales</th>
+                        <th>mrp sales (₹)</th>
+                        <th>subtotal sales (₹)</th>
                         <th>units sold</th>
-                        <th>avg. sales price</th>
+                        <th>avg. sales price (₹)</th>
                         <th>no. of orders</th>
-                        <th>avg. order value</th>
+                        <th>avg. order value (₹)</th>
                         <th>Edit/delete</th>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Total</td>
-                            <td>₹12345</td>
-                            <td>₹12345</td>
+                            <td>12345</td>
+                            <td>12345</td>
                             <td>3600</td>
-                            <td>₹130067</td>
+                            <td>130067</td>
                             <td>800</td>
-                            <td>₹1234</td>
-                            <td><i onclick="edit_row()" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
+                            <td>1234</td>
+                            <td><i onclick="edit_row(1)" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
                         </tr>
                         <tr>
                             <td>MAC Makeup 101 kit</td>
-                            <td>₹97500</td>
-                            <td>₹97500</td>
+                            <td>97500</td>
+                            <td>97500</td>
                             <td>2800</td>
-                            <td>₹1300</td>
+                            <td>1300</td>
                             <td>64</td>
-                            <td>₹1300</td>
-                            <td><i onclick="edit_row()" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
+                            <td>1300</td>
+                            <td><i onclick="edit_row(2)" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
                         </tr>
                         <tr>
                             <td>Bobby Brown - Cream White</td>
-                            <td>₹97500</td>
-                            <td>₹97500</td>
+                            <td>97500</td>
+                            <td>97500</td>
                             <td>800</td>
-                            <td>₹1300</td>
+                            <td>1300</td>
                             <td>64</td>
-                            <td>₹1300</td>
-                            <td><i onclick="edit_row()" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
+                            <td>1300</td>
+                            <td><i onclick="edit_row(3)" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
                         </tr>
                     </tbody>
                 </table>
@@ -181,6 +195,7 @@
                     <input id="input7" type="number" placeholder="Avg. Order Value">
                     <div style="margin-top: 10px;">
                         <button id="add-btn" class="insert-btn">Add</button>
+                        <button id="edit-add-btn" class="insert-btn-1" >Update</button>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,58 @@
+//side nav hover
+$("#side-nav-hover").resize(function(e){
+    console.log("hi")
+  });
+
+//sidenav -lock 
+document.getElementById("sidenav-lock").addEventListener("click",function(){
+    document.getElementById("nykaa-img").setAttribute("src","Assets/icon/NykaaLogoSvg.svg");
+    document.getElementById("nykaa-img").style.width = "150px";
+    document.getElementById("side-nav-hover").style.width = "150px";
+    document.getElementById("top-nav").style.marginLeft = "150px";
+    document.getElementById("top-nav").style.width = "87%";
+    document.getElementById("middle-content").style.marginLeft = "150px";
+    document.getElementById("sidenav-lock").style.display = "none";
+    document.getElementById("sidenav-lock-close").style.display = "block";
+});
+document.getElementById("sidenav-lock-close").addEventListener("click",function(){
+    document.getElementById("nykaa-img").setAttribute("src","Assets/icon/Nykaa-small.png");
+    document.getElementById("nykaa-img").style.width = "40px";
+    document.getElementById("side-nav-hover").style.width = "50px";
+    document.getElementById("top-nav").style.marginLeft = "50px";
+    document.getElementById("top-nav").style.width = "94%";
+    document.getElementById("middle-content").style.marginLeft = "50px";
+    document.getElementById("sidenav-lock").style.display = "block";
+    document.getElementById("sidenav-lock-close").style.display = "none";
+})
+
+//notify open
+document.getElementById("notify").addEventListener("click",function(){
+    var div = document.getElementById("notify-content");
+    console.log(div.classList)
+    if(div.classList.contains("notification-popup")){
+        div.classList.remove("notification-popup");
+        div.classList.add("notification-popup-open");
+    }
+    else{
+        div.classList.add("notification-popup");
+        div.classList.remove("notification-popup-open");
+    }
+})
+
+//user open
+document.getElementById("user").addEventListener("click",function(){
+    var div = document.getElementById("user-content");
+    console.log(div.classList)
+    if(div.classList.contains("user-popup")){
+        div.classList.remove("user-popup");
+        div.classList.add("user-popup-open");
+    }
+    else{
+        div.classList.add("user-popup");
+        div.classList.remove("user-popup-open");
+    }
+})
+
 // month toggle
 document.getElementById("btn-last").addEventListener("click",function(){
     document.getElementById("btn-last").classList.remove("btn-normal");
@@ -62,6 +117,8 @@ document.getElementById("graph-btn-left").addEventListener("click",function(){
 
 //insert table rows dynamically
 document.getElementById("ins-btn").addEventListener("click",function(){
+    document.getElementById("add-btn").style.display = "block";
+    document.getElementById("edit-add-btn").style.display = "none";
     document.getElementById("modal-box").style.display = "block";
     document.getElementById("main").style.overflow = "hidden";
 });
@@ -78,7 +135,7 @@ document.getElementById("add-btn").addEventListener("click",function(){
 
     var td = document.createElement("td");
     var i1 = document.createElement("i");
-    i1.setAttribute("onclick","edit_row()");
+    i1.setAttribute("onclick","edit_row("+(tot_rows+1)+")");
     i1.setAttribute("class","fa fa-pencil");
     td.appendChild(i1);
     var i2 = document.createElement("i");
@@ -90,7 +147,7 @@ document.getElementById("add-btn").addEventListener("click",function(){
     document.getElementById("modal-box").style.display = "none";
     document.getElementById("main").style.overflow = "auto";
 
-    for(var itr=0;itr<itr<table.rows[0].cells.length-1;itr++){
+    for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
         document.getElementById("input"+(itr+1)).value="";
     }
 });
@@ -114,14 +171,47 @@ function delete_row(){
 }
 
 //Edit row
-function edit_row(){
-    var table = document.getElementById("table");
-    var td = event.target.parentNode;
-    var data = td.parentNode.innerText;
-    var data_arr = data.split("  ");
-    console.log(data_arr)
-}
+var current_row = 0;
+function edit_row(row_index){
+    document.getElementById("edit-add-btn").style.display = "block";
+    document.getElementById("add-btn").style.display = "none";
+    document.getElementById("modal-box").style.display = "block";
+    document.getElementById("main").style.overflow = "hidden";
 
+    var table = document.getElementById("table");
+    for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+        document.getElementById("input"+(itr+1)).value = table.rows[row_index].cells[itr].innerHTML;
+    }
+    current_row = row_index;
+}
+document.getElementById("edit-add-btn").addEventListener("click",function(){
+    var cell_count = 0;
+    var table = document.getElementById("table");
+    var tot_rows = (table.rows.length)-1;
+    var row = table.insertRow(current_row);
+
+    for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+        row.insertCell(cell_count+itr).innerHTML = document.getElementById("input"+(itr+1)).value;
+    }
+    var td = document.createElement("td");
+    var i1 = document.createElement("i");
+    i1.setAttribute("onclick","edit_row("+(tot_rows+1)+")");
+    i1.setAttribute("class","fa fa-pencil");
+    td.appendChild(i1);
+    var i2 = document.createElement("i");
+    i2.setAttribute("onclick","delete_row()");
+    i2.setAttribute("class","fa fa-trash");
+    td.appendChild(i2);
+    row.insertCell(cell_count+itr).innerHTML =td.innerHTML;
+    table.deleteRow(current_row+1);
+
+    document.getElementById("modal-box").style.display = "none";
+    document.getElementById("main").style.overflow = "auto";
+
+    for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+        document.getElementById("input"+(itr+1)).value="";
+    }
+})
 
 //graph
 var ctx = document.getElementById('myChart');

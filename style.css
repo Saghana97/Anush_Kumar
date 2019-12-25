@@ -7,6 +7,7 @@ html,body{
 }
 a{
     margin: 0;
+    padding: 0;
 }
 p{
     margin: 0;
@@ -15,12 +16,17 @@ p{
     z-index: 10;
     position: fixed;
     top: 0;
-    margin-left: auto;
-    width: 100%;
+    margin-left: 50px;
     display: flex;
-    padding: 5px 60px 5px 0px;
+    width: 94%;
+    padding: 15px 20px;
     background-color: #fff;
     box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.5s;
+}
+.top-nav img{
+    height: 24px;
+    cursor: pointer;
 }
 .margin-left-content{
     margin-left: auto;
@@ -37,7 +43,107 @@ p{
 }
 .top-nav-logo{
     height: 50px;
-    width: 260px;
+}
+.notification-nos{
+    position: relative;
+    font-size: 10px;
+    top: 5px;
+    left: -10px;
+    color: #fff;
+    padding: 1px 5px;
+    border-radius: 50%;
+    background-color: deeppink;
+}
+.notification-popup{
+    z-index: -11 !important;
+    position: fixed;
+    top: 70px;
+    right: 200px;
+    width: 200px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.notification-popup-open{
+    z-index: 11 !important;
+    position: fixed;
+    top: 50px;
+    right: 200px;
+    width: 200px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.notification-popup-ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.notification-popup-li{
+    cursor: pointer;
+    padding: 15px;
+    border-bottom: .5px solid #8c8d9462;
+    transition: all 0.2s;
+}
+.notification-popup-li:first-child{
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}.notification-popup-li:last-child{
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.notification-popup-li:hover{
+    background-color: pink;
+    color: #fff;
+    border-bottom: .5px solid pink;
+}
+.user-popup{
+    z-index: -11 !important;
+    position: fixed;
+    top: 70px;
+    right: 0px;
+    width: 200px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.user-popup-open{
+    z-index: 11 !important;
+    position: fixed;
+    top: 50px;
+    right: 0px;
+    width: 200px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.user-popup-ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.user-popup-li{
+    cursor: pointer;
+    padding: 15px;
+    border-bottom: .5px solid #8c8d9462;
+    transition: all 0.2s;
+}
+.user-popup-li:first-child{
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.user-popup-li:last-child{
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.user-popup-li:hover{
+    background-color: pink;
+    color: #fff;
+    border-bottom: .5px solid pink;
 }
 .top-nav-left{
     display: flex;
@@ -71,19 +177,11 @@ p{
     border-right: .5px solid #8c8d9462;
     text-align: center;
     overflow: hidden;
-}
-.side-nav-img{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-left: 3px solid white;
     transition: all 0.5s;
 }
-.side-nav-img:hover{
-    background-color: pink;
-    border-left: 3px solid deeppink;
-}
-.side-nav-img img{
-    height: 20px;
+.side-nav:hover{
+    width: 150px !important; 
+    box-shadow: 0 1px 80px 0 rgba(0, 0, 0, 0.2);
 }
 .side-nav-inside{
     display: flex;
@@ -94,22 +192,37 @@ p{
 .margin-side-nav{
     height: 200px;
 }
-.side-nav-inside img{
+.side-nav-inside-div img{
+    height: 24px;
+    padding-right: 20px;
+}
+.side-nav-inside-div{
     cursor: pointer;
-    height: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
     border-left: 3px solid white;
     transition: all 0.5s;
 }
-.side-nav-inside img:hover{
+.side-nav-inside-div:hover{
     background-color: pink;
     border-left: 3px solid deeppink;
+}
+.nykaa-img{
+    height: 50px;
+    width: 50px;
+    background-color: #3f414d;
+}
+#sidenav-lock-close{
+    display: none;
+    transform: rotate(45deg);
 }
 .middle-content{
     margin-top: 60px;
     margin-left: 50px;
     height: 100%;
+    transition: all 0.5s;
 }
 .middle-content-1 p{
     margin: 0;
@@ -395,6 +508,16 @@ td i{
     cursor: pointer;
 }
 .insert-btn{
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+    border: .5px solid #8c8d9462;
+    border-radius: 5px;
+    color: deeppink;
+    font-weight: 800;
+}
+.insert-btn-1{
     cursor: pointer;
     padding: 10px 20px;
     background-color: #fff;
