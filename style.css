@@ -372,7 +372,6 @@ p{
     text-align: center;
     font-family: 'Source Sans Pro', sans-serif;
     box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
-    border: .5px solid #8c8d9462;
     border-collapse: separate;
     border-spacing: 0 8px;
 }
@@ -388,6 +387,12 @@ td{
     border-top: .5px solid #8c8d9462;
     border-right: .5px solid #8c8d9462;
     background-color: #fff;
+}
+td i{
+    color: deeppink;
+    font-weight: 800;
+    margin-right: 10px;
+    cursor: pointer;
 }
 .insert-btn{
     cursor: pointer;

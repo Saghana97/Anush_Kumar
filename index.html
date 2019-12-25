@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha256-8zyeSXm+yTvzUN1VgAOinFgaVFEFTyYzWShOy9w7WoQ=" crossorigin="anonymous"></script>
+    
 </head>
 <body id="main">
     <div  class="main">
@@ -134,6 +135,7 @@
                         <th>avg. sales price</th>
                         <th>no. of orders</th>
                         <th>avg. order value</th>
+                        <th>Edit/delete</th>
                     </thead>
                     <tbody>
                         <tr>
@@ -144,6 +146,7 @@
                             <td>₹130067</td>
                             <td>800</td>
                             <td>₹1234</td>
+                            <td><i onclick="edit_row()" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
                         </tr>
                         <tr>
                             <td>MAC Makeup 101 kit</td>
@@ -153,6 +156,7 @@
                             <td>₹1300</td>
                             <td>64</td>
                             <td>₹1300</td>
+                            <td><i onclick="edit_row()" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
                         </tr>
                         <tr>
                             <td>Bobby Brown - Cream White</td>
@@ -162,18 +166,19 @@
                             <td>₹1300</td>
                             <td>64</td>
                             <td>₹1300</td>
+                            <td><i onclick="edit_row()" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
                         </tr>
                     </tbody>
                 </table>
                 <div id="modal-box" class="modal-input">
                     <button id="close-btn" class="close-btn"><img id="plus-img" class="middle-content-3-btn-filter-img" src="Assets/icon/plus-sign.svg" alt=""></button>
                     <input id="input1" type="text" placeholder="Products">
-                    <input id="input2" type="text" placeholder="MRP Sales">
-                    <input id="input3" type="text" placeholder="Subtotal Sales">
-                    <input id="input4" type="text" placeholder="Units Sold">
-                    <input id="input5" type="text" placeholder="Avg. Sales Price">
-                    <input id="input6" type="text" placeholder="No. of Orders">
-                    <input id="input7" type="text" placeholder="Avg. Order Value">
+                    <input id="input2" type="number" placeholder="MRP Sales">
+                    <input id="input3" type="number" placeholder="Subtotal Sales">
+                    <input id="input4" type="number" placeholder="Units Sold">
+                    <input id="input5" type="number" placeholder="Avg. Sales Price">
+                    <input id="input6" type="number" placeholder="No. of Orders">
+                    <input id="input7" type="number" placeholder="Avg. Order Value">
                     <div style="margin-top: 10px;">
                         <button id="add-btn" class="insert-btn">Add</button>
                     </div>

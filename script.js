@@ -71,29 +71,56 @@ document.getElementById("add-btn").addEventListener("click",function(){
     var table = document.getElementById("table");
     var tot_rows = (table.rows.length)-1;
     var row = table.insertRow(tot_rows+1);
-    row.insertCell(cell_count).innerHTML = document.getElementById("input1").value;
-    row.insertCell(cell_count+1).innerHTML = document.getElementById("input2").value;
-    row.insertCell(cell_count+2).innerHTML = document.getElementById("input3").value;
-    row.insertCell(cell_count+3).innerHTML = document.getElementById("input4").value;
-    row.insertCell(cell_count+4).innerHTML = document.getElementById("input5").value;
-    row.insertCell(cell_count+5).innerHTML = document.getElementById("input6").value;
-    row.insertCell(cell_count+6).innerHTML = document.getElementById("input7").value;
+
+    for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+        row.insertCell(cell_count+itr).innerHTML = document.getElementById("input"+(itr+1)).value;
+    }
+
+    var td = document.createElement("td");
+    var i1 = document.createElement("i");
+    i1.setAttribute("onclick","edit_row()");
+    i1.setAttribute("class","fa fa-pencil");
+    td.appendChild(i1);
+    var i2 = document.createElement("i");
+    i2.setAttribute("onclick","delete_row()");
+    i2.setAttribute("class","fa fa-trash");
+    td.appendChild(i2);
+    row.insertCell(cell_count+itr).innerHTML =td.innerHTML;
 
     document.getElementById("modal-box").style.display = "none";
     document.getElementById("main").style.overflow = "auto";
 
-    document.getElementById("input1").value="";
-    document.getElementById("input2").value="";
-    document.getElementById("input3").value="";
-    document.getElementById("input4").value="";
-    document.getElementById("input5").value="";
-    document.getElementById("input6").value="";
-    document.getElementById("input7").value="";
+    for(var itr=0;itr<itr<table.rows[0].cells.length-1;itr++){
+        document.getElementById("input"+(itr+1)).value="";
+    }
 });
+
+function validate(id){
+    if(document.getElementById(id).value=""){
+        return 1;
+    }
+    return 0;
+}
 document.getElementById("close-btn").addEventListener("click",function(){
     document.getElementById("modal-box").style.display = "none";
     document.getElementById("main").style.overflow = "auto";
 });
+
+//remove a row
+function delete_row(){
+    var td = event.target.parentNode;
+    var tr = td.parentNode;
+    tr.parentNode.removeChild(tr);
+}
+
+//Edit row
+function edit_row(){
+    var table = document.getElementById("table");
+    var td = event.target.parentNode;
+    var data = td.parentNode.innerText;
+    var data_arr = data.split("  ");
+    console.log(data_arr)
+}
 
 
 //graph
