@@ -5,6 +5,9 @@ html,body{
     background-color: #f0f0f0;
     color: #333;
 }
+button{
+    outline: none;
+}
 a{
     margin: 0;
     padding: 0;
@@ -559,4 +562,12 @@ td i{
 }
 .close-btn img{
     transform: rotate(45deg);
+}
+.alert{
+    display: none;
+    position: absolute;
+    color: deeppink;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 800;
 }

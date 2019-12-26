@@ -1,8 +1,3 @@
-//side nav hover
-$("#side-nav-hover").resize(function(e){
-    console.log("hi")
-  });
-
 //sidenav -lock 
 document.getElementById("sidenav-lock").addEventListener("click",function(){
     document.getElementById("nykaa-img").setAttribute("src","Assets/icon/NykaaLogoSvg.svg");
@@ -13,6 +8,7 @@ document.getElementById("sidenav-lock").addEventListener("click",function(){
     document.getElementById("middle-content").style.marginLeft = "150px";
     document.getElementById("sidenav-lock").style.display = "none";
     document.getElementById("sidenav-lock-close").style.display = "block";
+    document.getElementById("graph-btn-left").style.left = "15%";
 });
 document.getElementById("sidenav-lock-close").addEventListener("click",function(){
     document.getElementById("nykaa-img").setAttribute("src","Assets/icon/Nykaa-small.png");
@@ -23,6 +19,7 @@ document.getElementById("sidenav-lock-close").addEventListener("click",function(
     document.getElementById("middle-content").style.marginLeft = "50px";
     document.getElementById("sidenav-lock").style.display = "block";
     document.getElementById("sidenav-lock-close").style.display = "none";
+    document.getElementById("graph-btn-left").style.left = "5%";
 })
 
 //notify open
@@ -30,12 +27,10 @@ document.getElementById("notify").addEventListener("click",function(){
     var div = document.getElementById("notify-content");
     console.log(div.classList)
     if(div.classList.contains("notification-popup")){
-        div.classList.remove("notification-popup");
-        div.classList.add("notification-popup-open");
+        div.classList.replace("notification-popup","notification-popup-open");
     }
     else{
-        div.classList.add("notification-popup");
-        div.classList.remove("notification-popup-open");
+        div.classList.replace("notification-popup-open","notification-popup");
     }
 })
 
@@ -44,57 +39,38 @@ document.getElementById("user").addEventListener("click",function(){
     var div = document.getElementById("user-content");
     console.log(div.classList)
     if(div.classList.contains("user-popup")){
-        div.classList.remove("user-popup");
-        div.classList.add("user-popup-open");
+        div.classList.replace("user-popup","user-popup-open");
     }
     else{
-        div.classList.add("user-popup");
-        div.classList.remove("user-popup-open");
+        div.classList.replace("user-popup-open","user-popup");
     }
 })
 
 // month toggle
 document.getElementById("btn-last").addEventListener("click",function(){
-    document.getElementById("btn-last").classList.remove("btn-normal");
-    document.getElementById("btn-last").classList.add("btn-active");
-
-    document.getElementById("btn-overall").classList.remove("btn-active");
-    document.getElementById("btn-overall").classList.add("btn-normal");
+    document.getElementById("btn-last").classList.replace("btn-normal","btn-active");
+    document.getElementById("btn-last").classList.replace("btn-active","btn-normal");
 });
-document.getElementById("btn-overall").addEventListener("click",function(){
-    document.getElementById("btn-overall").classList.remove("btn-normal");
-    document.getElementById("btn-overall").classList.add("btn-active");
 
-    document.getElementById("btn-last").classList.remove("btn-active");
-    document.getElementById("btn-last").classList.add("btn-normal");
+document.getElementById("btn-overall").addEventListener("click",function(){
+    document.getElementById("btn-overall").replace("btn-normal","btn-active");
+    document.getElementById("btn-overall").replace("btn-active","btn-normal");
 });
 
 //filter toggle
 document.getElementById("product-li").addEventListener("click",function(){
     document.getElementById("product-li").classList.add("view-by-filter-ul-li-active");
-
-    document.getElementById("brand-li").classList.remove("view-by-filter-ul-li-active");
-    document.getElementById("brand-li").classList.add("view-by-filter-ul-li");
-
-    document.getElementById("month-li").classList.remove("view-by-filter-ul-li-active");
-    document.getElementById("month-li").classList.add("view-by-filter-ul-li");
+    document.getElementById("brand-li").classList.replace("view-by-filter-ul-li-active","view-by-filter-ul-li");
+    document.getElementById("month-li").classList.replace("view-by-filter-ul-li-active","view-by-filter-ul-li");
 });
 document.getElementById("brand-li").addEventListener("click",function(){
-    document.getElementById("product-li").classList.remove("view-by-filter-ul-li-active");
-    document.getElementById("product-li").classList.add("view-by-filter-ul-li");
-
+    document.getElementById("product-li").classList.replace("view-by-filter-ul-li-active","view-by-filter-ul-li");
     document.getElementById("brand-li").classList.add("view-by-filter-ul-li-active");
-
-    document.getElementById("month-li").classList.remove("view-by-filter-ul-li-active");
-    document.getElementById("month-li").classList.add("view-by-filter-ul-li");
+    document.getElementById("month-li").classList.replace("view-by-filter-ul-li-active","view-by-filter-ul-li");
 });
 document.getElementById("month-li").addEventListener("click",function(){
-    document.getElementById("product-li").classList.remove("view-by-filter-ul-li-active");
-    document.getElementById("product-li").classList.add("view-by-filter-ul-li");
-
-    document.getElementById("brand-li").classList.remove("view-by-filter-ul-li-active");
-    document.getElementById("brand-li").classList.add("view-by-filter-ul-li-");
-
+    document.getElementById("product-li").classList.replace("view-by-filter-ul-li-active","view-by-filter-ul-li");
+    document.getElementById("brand-li").classList.replace("view-by-filter-ul-li-active","view-by-filter-ul-li");
     document.getElementById("month-li").classList.add("view-by-filter-ul-li-active");
 });
 
@@ -117,6 +93,7 @@ document.getElementById("graph-btn-left").addEventListener("click",function(){
 
 //insert table rows dynamically
 document.getElementById("ins-btn").addEventListener("click",function(){
+    document.getElementById("plus-img").style.transform = "rotate(360deg)";
     document.getElementById("add-btn").style.display = "block";
     document.getElementById("edit-add-btn").style.display = "none";
     document.getElementById("modal-box").style.display = "block";
@@ -124,40 +101,52 @@ document.getElementById("ins-btn").addEventListener("click",function(){
 });
 
 document.getElementById("add-btn").addEventListener("click",function(){
+    var count=0;
     var cell_count = 0;
     var table = document.getElementById("table");
     var tot_rows = (table.rows.length)-1;
-    var row = table.insertRow(tot_rows+1);
 
     for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
-        row.insertCell(cell_count+itr).innerHTML = document.getElementById("input"+(itr+1)).value;
+        if(document.getElementById("input"+(itr+1)).value.length == 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill all the inputs!',
+                showConfirmButton: false,
+                timer: 2000
+            })
+            return;
+        }
+        else{
+            count+=1;
+        }
     }
+    if(count >= 7){
+        var row = table.insertRow(tot_rows+1);
 
-    var td = document.createElement("td");
-    var i1 = document.createElement("i");
-    i1.setAttribute("onclick","edit_row("+(tot_rows+1)+")");
-    i1.setAttribute("class","fa fa-pencil");
-    td.appendChild(i1);
-    var i2 = document.createElement("i");
-    i2.setAttribute("onclick","delete_row()");
-    i2.setAttribute("class","fa fa-trash");
-    td.appendChild(i2);
-    row.insertCell(cell_count+itr).innerHTML =td.innerHTML;
+        for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+            row.insertCell(cell_count+itr).innerHTML = document.getElementById("input"+(itr+1)).value;
+        }
 
-    document.getElementById("modal-box").style.display = "none";
-    document.getElementById("main").style.overflow = "auto";
+        var td = document.createElement("td");
+        var i1 = document.createElement("i");
+        i1.setAttribute("onclick","edit_row("+(tot_rows+1)+")");
+        i1.setAttribute("class","fa fa-pencil");
+        td.appendChild(i1);
+        var i2 = document.createElement("i");
+        i2.setAttribute("onclick","delete_row()");
+        i2.setAttribute("class","fa fa-trash");
+        td.appendChild(i2);
+        row.insertCell(cell_count+itr).innerHTML =td.innerHTML;
 
-    for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
-        document.getElementById("input"+(itr+1)).value="";
+        document.getElementById("modal-box").style.display = "none";
+        document.getElementById("main").style.overflow = "auto";
+
+        for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+            document.getElementById("input"+(itr+1)).value="";
+        }
     }
 });
-
-function validate(id){
-    if(document.getElementById(id).value=""){
-        return 1;
-    }
-    return 0;
-}
 document.getElementById("close-btn").addEventListener("click",function(){
     document.getElementById("modal-box").style.display = "none";
     document.getElementById("main").style.overflow = "auto";
@@ -211,7 +200,21 @@ document.getElementById("edit-add-btn").addEventListener("click",function(){
     for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
         document.getElementById("input"+(itr+1)).value="";
     }
-})
+});
+
+//
+function validate(id){
+    var input_box = document.getElementById(id).value;
+    if(input_box.length == 0){
+        document.getElementById("alert-msg").style.display = "block";
+        return 0;
+    }
+    setTimeout(() => {
+        document.getElementById("alert-msg").style.display = "none";
+    }, 1500);
+    return 1;
+}
+
 
 //graph
 var ctx = document.getElementById('myChart');
