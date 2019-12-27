@@ -210,6 +210,7 @@ p{
 }
 .side-nav-inside-div:hover{
     background-color: pink;
+    color: #000;
     border-left: 3px solid deeppink;
 }
 .nykaa-img{
@@ -483,17 +484,32 @@ p{
 .table-data{
     margin: 40px 20px 0 20px;
 }
+.table-wrap{
+    margin-top: 20px;
+    width: 1250px;
+    height: 368px;
+    overflow: auto;
+}
 .table-white{
+    padding-top: 50px;
     width: 100%;
     text-align: center;
     font-family: 'Source Sans Pro', sans-serif;
     box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
     border-collapse: separate;
     border-spacing: 0 8px;
+    table-layout: fixed;
+}
+thead{
+    position: absolute;
+    margin-top: -60px;
+    background-color: #f0f0f0;
+    z-index: 2;
 }
 th{
+    width: 151.5px;
+    height: 50px;
     font-size: 14px;
-    padding: 15px 10px;
     text-transform: uppercase;
     border-right: .5px solid #8c8d9462;
 }

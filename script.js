@@ -49,12 +49,12 @@ document.getElementById("user").addEventListener("click",function(){
 // month toggle
 document.getElementById("btn-last").addEventListener("click",function(){
     document.getElementById("btn-last").classList.replace("btn-normal","btn-active");
-    document.getElementById("btn-last").classList.replace("btn-active","btn-normal");
+    document.getElementById("btn-overall").classList.replace("btn-active","btn-normal");
 });
 
 document.getElementById("btn-overall").addEventListener("click",function(){
-    document.getElementById("btn-overall").replace("btn-normal","btn-active");
-    document.getElementById("btn-overall").replace("btn-active","btn-normal");
+    document.getElementById("btn-overall").classList.replace("btn-normal","btn-active");
+    document.getElementById("btn-last").classList.replace("btn-active","btn-normal");
 });
 
 //filter toggle
@@ -92,117 +92,117 @@ document.getElementById("graph-btn-left").addEventListener("click",function(){
 });
 
 //insert table rows dynamically
-document.getElementById("ins-btn").addEventListener("click",function(){
-    document.getElementById("plus-img").style.transform = "rotate(360deg)";
-    document.getElementById("add-btn").style.display = "block";
-    document.getElementById("edit-add-btn").style.display = "none";
-    document.getElementById("modal-box").style.display = "block";
-    document.getElementById("main").style.overflow = "hidden";
-});
+// document.getElementById("ins-btn").addEventListener("click",function(){
+//     document.getElementById("plus-img").style.transform = "rotate(360deg)";
+//     document.getElementById("add-btn").style.display = "block";
+//     document.getElementById("edit-add-btn").style.display = "none";
+//     document.getElementById("modal-box").style.display = "block";
+//     document.getElementById("main").style.overflow = "hidden";
+// });
 
-document.getElementById("add-btn").addEventListener("click",function(){
-    var count=0;
-    var cell_count = 0;
-    var table = document.getElementById("table");
-    var tot_rows = (table.rows.length)-1;
+// document.getElementById("add-btn").addEventListener("click",function(){
+//     var count=0;
+//     var cell_count = 0;
+//     var table = document.getElementById("table");
+//     var tot_rows = (table.rows.length)-1;
 
-    for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
-        if(document.getElementById("input"+(itr+1)).value.length == 0){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Please fill all the inputs!',
-                showConfirmButton: false,
-                timer: 2000
-            })
-            return;
-        }
-        else{
-            count+=1;
-        }
-    }
-    if(count >= 7){
-        var row = table.insertRow(tot_rows+1);
+//     for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+//         if(document.getElementById("input"+(itr+1)).value.length == 0){
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Oops...',
+//                 text: 'Please fill all the inputs!',
+//                 showConfirmButton: false,
+//                 timer: 2000
+//             })
+//             return;
+//         }
+//         else{
+//             count+=1;
+//         }
+//     }
+//     if(count >= 7){
+//         var row = table.insertRow(tot_rows+1);
 
-        for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
-            row.insertCell(cell_count+itr).innerHTML = document.getElementById("input"+(itr+1)).value;
-        }
+//         for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+//             row.insertCell(cell_count+itr).innerHTML = document.getElementById("input"+(itr+1)).value;
+//         }
 
-        var td = document.createElement("td");
-        var i1 = document.createElement("i");
-        i1.setAttribute("onclick","edit_row("+(tot_rows+1)+")");
-        i1.setAttribute("class","fa fa-pencil");
-        td.appendChild(i1);
-        var i2 = document.createElement("i");
-        i2.setAttribute("onclick","delete_row()");
-        i2.setAttribute("class","fa fa-trash");
-        td.appendChild(i2);
-        row.insertCell(cell_count+itr).innerHTML =td.innerHTML;
+//         var td = document.createElement("td");
+//         var i1 = document.createElement("i");
+//         i1.setAttribute("onclick","edit_row("+(tot_rows+1)+")");
+//         i1.setAttribute("class","fa fa-pencil");
+//         td.appendChild(i1);
+//         var i2 = document.createElement("i");
+//         i2.setAttribute("onclick","delete_row()");
+//         i2.setAttribute("class","fa fa-trash");
+//         td.appendChild(i2);
+//         row.insertCell(cell_count+itr).innerHTML =td.innerHTML;
 
-        document.getElementById("modal-box").style.display = "none";
-        document.getElementById("main").style.overflow = "auto";
+//         document.getElementById("modal-box").style.display = "none";
+//         document.getElementById("main").style.overflow = "auto";
 
-        for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
-            document.getElementById("input"+(itr+1)).value="";
-        }
-    }
-});
-document.getElementById("close-btn").addEventListener("click",function(){
-    document.getElementById("modal-box").style.display = "none";
-    document.getElementById("main").style.overflow = "auto";
-});
+//         for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+//             document.getElementById("input"+(itr+1)).value="";
+//         }
+//     }
+// });
+// document.getElementById("close-btn").addEventListener("click",function(){
+//     document.getElementById("modal-box").style.display = "none";
+//     document.getElementById("main").style.overflow = "auto";
+// });
 
 //remove a row
-function delete_row(){
-    var td = event.target.parentNode;
-    var tr = td.parentNode;
-    tr.parentNode.removeChild(tr);
-}
+// function delete_row(){
+//     var td = event.target.parentNode;
+//     var tr = td.parentNode;
+//     tr.parentNode.removeChild(tr);
+// }
 
 //Edit row
-var current_row = 0;
-function edit_row(row_index){
-    document.getElementById("edit-add-btn").style.display = "block";
-    document.getElementById("add-btn").style.display = "none";
-    document.getElementById("modal-box").style.display = "block";
-    document.getElementById("main").style.overflow = "hidden";
+// var current_row = 0;
+// function edit_row(row_index){
+//     document.getElementById("edit-add-btn").style.display = "block";
+//     document.getElementById("add-btn").style.display = "none";
+//     document.getElementById("modal-box").style.display = "block";
+//     document.getElementById("main").style.overflow = "hidden";
 
-    var table = document.getElementById("table");
-    for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
-        document.getElementById("input"+(itr+1)).value = table.rows[row_index].cells[itr].innerHTML;
-    }
-    current_row = row_index;
-}
-document.getElementById("edit-add-btn").addEventListener("click",function(){
-    var cell_count = 0;
-    var table = document.getElementById("table");
-    var tot_rows = (table.rows.length)-1;
-    var row = table.insertRow(current_row);
+//     var table = document.getElementById("table");
+//     for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+//         document.getElementById("input"+(itr+1)).value = table.rows[row_index].cells[itr].innerHTML;
+//     }
+//     current_row = row_index;
+// }
+// document.getElementById("edit-add-btn").addEventListener("click",function(){
+//     var cell_count = 0;
+//     var table = document.getElementById("table");
+//     var tot_rows = (table.rows.length)-1;
+//     var row = table.insertRow(current_row);
 
-    for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
-        row.insertCell(cell_count+itr).innerHTML = document.getElementById("input"+(itr+1)).value;
-    }
-    var td = document.createElement("td");
-    var i1 = document.createElement("i");
-    i1.setAttribute("onclick","edit_row("+(tot_rows+1)+")");
-    i1.setAttribute("class","fa fa-pencil");
-    td.appendChild(i1);
-    var i2 = document.createElement("i");
-    i2.setAttribute("onclick","delete_row()");
-    i2.setAttribute("class","fa fa-trash");
-    td.appendChild(i2);
-    row.insertCell(cell_count+itr).innerHTML =td.innerHTML;
-    table.deleteRow(current_row+1);
+//     for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+//         row.insertCell(cell_count+itr).innerHTML = document.getElementById("input"+(itr+1)).value;
+//     }
+//     var td = document.createElement("td");
+//     var i1 = document.createElement("i");
+//     i1.setAttribute("onclick","edit_row("+(current_row)+")");
+//     i1.setAttribute("class","fa fa-pencil");
+//     td.appendChild(i1);
+//     var i2 = document.createElement("i");
+//     i2.setAttribute("onclick","delete_row()");
+//     i2.setAttribute("class","fa fa-trash");
+//     td.appendChild(i2);
+//     row.insertCell(cell_count+itr).innerHTML =td.innerHTML;
+//     table.deleteRow(current_row+1);
 
-    document.getElementById("modal-box").style.display = "none";
-    document.getElementById("main").style.overflow = "auto";
+//     document.getElementById("modal-box").style.display = "none";
+//     document.getElementById("main").style.overflow = "auto";
 
-    for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
-        document.getElementById("input"+(itr+1)).value="";
-    }
-});
+//     for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+//         document.getElementById("input"+(itr+1)).value="";
+//     }
+// });
 
-//
+//validate input
 function validate(id){
     var input_box = document.getElementById(id).value;
     if(input_box.length == 0){
@@ -215,6 +215,35 @@ function validate(id){
     return 1;
 }
 
+//inifinte scrolling
+// var scrollPos = 0;
+// document.getElementById("table-wrap-scroll").addEventListener("scroll",function(){
+//     var count=0;
+//     var cell_count = 0;
+//     var table = document.getElementById("table");
+//     var tot_rows = (table.rows.length)-1;
+    
+//     if( document.getElementById("table-wrap-scroll").scrollTop === (document.getElementById("table-wrap-scroll").scrollHeight - document.getElementById("table-wrap-scroll").offsetHeight))
+//     {
+//         console.log("reached end");
+//         var row = table.insertRow(tot_rows+1);
+
+//         for(var itr=0;itr<table.rows[0].cells.length-1;itr++){
+//             row.insertCell(cell_count+itr).innerHTML = table.rows[2].cells[itr].innerHTML;
+//         }
+    
+//         var td = document.createElement("td");
+//         var i1 = document.createElement("i");
+//         i1.setAttribute("onclick","edit_row("+(tot_rows+1)+")");
+//         i1.setAttribute("class","fa fa-pencil");
+//         td.appendChild(i1);
+//         var i2 = document.createElement("i");
+//         i2.setAttribute("onclick","delete_row()");
+//         i2.setAttribute("class","fa fa-trash");
+//         td.appendChild(i2);
+//         row.insertCell(cell_count+itr).innerHTML =td.innerHTML;
+//     }
+// });
 
 //graph
 var ctx = document.getElementById('myChart');

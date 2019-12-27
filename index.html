@@ -139,51 +139,32 @@
             </div>
             <div class="table-data">
                 <button id="ins-btn" class="insert-btn"><img id="plus-img" class="middle-content-3-btn-filter-img" src="Assets/icon/plus-sign.svg" alt=""></button>
-                <div></div>
-                <table id="table" class="table-white">
-                    <thead>
-                        <th>products (sku)</th>
-                        <th>mrp sales (₹)</th>
-                        <th>subtotal sales (₹)</th>
-                        <th>units sold</th>
-                        <th>avg. sales price (₹)</th>
-                        <th>no. of orders</th>
-                        <th>avg. order value (₹)</th>
-                        <th>Edit/delete</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Total</td>
-                            <td>12345</td>
-                            <td>12345</td>
-                            <td>3600</td>
-                            <td>130067</td>
-                            <td>800</td>
-                            <td>1234</td>
-                            <td><i onclick="edit_row(1)" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
-                        </tr>
-                        <tr>
-                            <td>MAC Makeup 101 kit</td>
-                            <td>97500</td>
-                            <td>97500</td>
-                            <td>2800</td>
-                            <td>1300</td>
-                            <td>64</td>
-                            <td>1300</td>
-                            <td><i onclick="edit_row(2)" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Bobby Brown - Cream White</td>
-                            <td>97500</td>
-                            <td>97500</td>
-                            <td>800</td>
-                            <td>1300</td>
-                            <td>64</td>
-                            <td>1300</td>
-                            <td><i onclick="edit_row(3)" class="fa fa-pencil"></i><i onclick="delete_row()" class="fa fa-trash"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div id="table-wrap-scroll" class="table-wrap">
+                    <table id="table" class="table-white">
+                        <thead>
+                            <th>products (sku)</th>
+                            <th>mrp sales (₹)</th>
+                            <th>subtotal sales (₹)</th>
+                            <th>units sold</th>
+                            <th>avg. sales price (₹)</th>
+                            <th>no. of orders</th>
+                            <th>avg. order value (₹)</th>
+                            <th>Edit/delete</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Total</td>
+                                <td>12345</td>
+                                <td>12345</td>
+                                <td>3600</td>
+                                <td>130067</td>
+                                <td>800</td>
+                                <td>1234</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div id="modal-box" class="modal-input">
                     <span id="alert-msg" class="alert">Empty, Please fill it.</span>
                     <button id="close-btn" class="close-btn"><img id="plus-img" class="middle-content-3-btn-filter-img" src="Assets/icon/plus-sign.svg" alt=""></button>
@@ -203,5 +184,7 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+    <script src="backend-script.js"></script>
 </body>
 </html>
