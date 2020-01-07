@@ -56,7 +56,7 @@ function SettleExpense(props){
                     </div>
                 </div>
                 <div style={{padding:"10px",textAlign:"right"}}>
-                    <Button class="exp-btn" name="Cancel"/>
+                    <Button class="exp-btn" name="Cancel" onclickmeth={handleSettleVisibility}/>
                     <Button class="exp-btn-2" name="Save" onclickmeth={handleSettleDashVisibility} />
                 </div>
                 

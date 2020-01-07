@@ -47,7 +47,7 @@ function ModalExpense(props){
                     <p className="exp-info">Paid by <span>you</span> and split <span>equally.<br/>($</span>0.00<span></span>/person)</p>
                 </div>
                 <div style={{padding:"10px",textAlign:"right"}}>
-                    <Button class="exp-btn" name="Cancel"/>
+                    <Button class="exp-btn" name="Cancel" onclickmeth={handleModalVisibility} />
                     <Button class="exp-btn-2" name="Save" onclickmeth={handleDashVisibility} />
                 </div>
                 
