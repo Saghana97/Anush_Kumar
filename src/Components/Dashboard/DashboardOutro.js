@@ -4,7 +4,7 @@ import LadyImage from './lady.png'
 
 function DashboardOutro(props){
     return(
-        <div style={{display: props.viewDash.visibility?"flex":"none"}} className="dashboard-details-empty">
+        <div className="dashboard-details-empty">
             <img className="dashboard-img" src={LadyImage} alt="women standing image"/>
             <div className="dashboard-content-para">
                 <DashboardPara class="dashboard-para-1" text="You’re all settled up. Awesome!"/>

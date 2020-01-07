@@ -26,7 +26,7 @@ function ModalExpense(props){
     }
     
     return(
-        <div style={{display:props.viewModal[3].modal?"block":"none"}} className="add-expense-modal">
+        <div style={{display:props.viewModal[3].modal?"block":"none" }} className="add-expense-modal">
             <div className="add-expense-1">
                 <p>Add an expense</p>
                 <Button class="close-btn" name="x" onclickmeth={handleModalVisibility}/>

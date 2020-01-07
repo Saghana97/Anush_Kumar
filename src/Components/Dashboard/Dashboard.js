@@ -31,13 +31,25 @@ function Dashboard(){
     function handleView(newView){
         setView(newView)
     }
+    function CustomRender(props){
+        const dashCurrent = props.viewType.map(item => {
+            if(item.dash == "dash-intro" && item.visibility){
+                return <DashboardIntro />
+            }
+            if(item.dash == "dash-outro" && item.visibility){
+                return  <DashboardOutro />
+            }
+            if(item.dash == "dash-exp" && item.visibility){
+                return <ExpenseTracker />
+            }
+        })
+        return dashCurrent
+    }
     return (
         <>
             <div className="dashboard-content">
                 <DashboardHeader method={handleView} viewType={view}/>
-                <DashboardIntro viewDash={view[0]}/>
-                <DashboardOutro viewDash={view[1]}/>
-                <ExpenseTracker  viewDash={view[2]}/>
+                <CustomRender viewType={view}/>
             </div>
             <ModalExpense method={handleView} viewModal={view}/>
             <SettleExpense method={handleView} viewModal={view}/>
