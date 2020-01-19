@@ -51,6 +51,64 @@ a{
   text-decoration: none;
   color: inherit;
 }
+.notfound{
+  margin-top: 100px;
+  text-align: center;
+  color: $theme-smoke-text;
+}
+.notfound h1{
+  color: $base-color;
+}
+.loading{
+  margin-top: 100px;
+  text-align: center;
+  color: $base-secondary-btn;
+}
+.loading-dots{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+}
+.loading h1{
+  color: $base-color;
+  font-weight: 800;
+}
+.loading-dots p:nth-child(1){
+  animation: lds-ellipsis3 0.6s infinite;
+}
+.loading-dots p:nth-child(2){
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.loading-dots p:nth-child(3){
+  left: 24px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
 .top-nav{
   position: relative;
   top: 0;
@@ -98,6 +156,51 @@ a{
   border-radius: 50%;
   margin-right: 5px;
 }
+//menu
+.menu{
+  position: absolute;
+  background-color: $theme;
+  border-radius: 5px;
+  z-index: 10;
+  width: 200px;
+  left: 71%;
+  top: 90%;
+  text-align: center;
+  color: $theme-smoke-text;
+  -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0 0 3px rgba(0,0,0,0.5);
+  box-shadow: 0 0 3px rgba(0,0,0,0.5);
+  animation: fade 0.2s;
+}
+.menu-ul{
+  margin: 0;
+  padding: 5px;
+}
+.menu-li{
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.menu-li:hover{
+  color: $base-color;
+  background-color: $theme-smoke;
+}
+.menu-li:last-child{
+  border-top: 1px solid $theme-smoke;
+}
+.option-list{
+  font-family: 'Lato', sans-serif;
+  width: 4%;
+  height: 4%;
+  top: 65.5%;
+  left: 46.5%;
+  border: none;
+  border-right: 1px solid $base-color;
+  background-color: $theme;
+  position: absolute;
+  outline: none;
+}
+//main
 .main-content{
   height: 93vh;
   background-color: $theme;
@@ -178,7 +281,26 @@ a{
 }
 .collection-list{
   text-align: center;
-  padding: 10px;
+}
+.ul-collection{
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  color: $theme-smoke-text;
+}
+.li-collection{
+  padding: 5px;
+  cursor: pointer;
+}
+.li-collection-desc{
+  padding: 5px;
+}
+.li-collection i{
+  margin-right: 5px;
+}
+.li-collection:hover{
+  background-color: $theme-smoke;
+  color: $theme-dark-text;
 }
 .invite-friends{
   font-size: 14px;
@@ -441,7 +563,7 @@ a{
 .summary-own{
   display: flex;
   cursor: pointer;
-  padding: 5px 15px;
+  padding: 8px 15px;
   transition: .3s;
 }
 .summary-own:hover{
@@ -491,6 +613,8 @@ a{
 }
 .image-wrapper{
   height: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .man-img-charts{
   height: 200px;
@@ -501,14 +625,17 @@ a{
 }
 .chart-you-owe-inside{
   display: flex;
-  padding: 5px;
+  padding: 5px 5px 5px 10px;
   margin-bottom: 10px;
   border-radius: 3px;
   font-family: 'Lato', sans-serif;
   flex-direction: column;
   text-align: right;
   margin-left: auto;
-  width: 60%;
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
   color: $theme;
   background-color: $base-secondary-btn;
 }
@@ -517,14 +644,16 @@ a{
 }
 .chart-you-are-owe-inside{
   display: flex;
-  padding: 5px;
+  padding: 5px 10px 5px 5px;
   margin-bottom: 10px;
   border-radius: 3px;
   font-family: 'Lato', sans-serif;
   flex-direction: column;
   text-align: left;
   margin-right: auto;
-  width: 60%;
+  width: fit-content;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
   color: $theme;
   background-color: $base-btn;
 }
@@ -649,6 +778,17 @@ a{
   border-radius: 3px;
   height: 30px;
 }
+.login-input-spl{
+  outline-color: skyblue;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 0 0 0 62px;
+  font-size: 20px;
+  border: 1px solid $theme-smoke-text;
+  border-radius: 3px;
+  width: 156px;
+  height: 30px;
+}
 .log-btn{
   outline: none;
   cursor: pointer;
@@ -707,6 +847,24 @@ hr{
   width:370px;
   background-color: $theme;
   box-shadow: 1px 2px 38px rgba(0,0,0,0.3);
+  animation: fade 0.2s;
+}
+@keyframes fade{
+  0%{
+    opacity: 0;
+  }
+  25%{
+    opacity: 0.25;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  75%{
+    opacity: 0.75;
+  }
+  100%{
+    opacity: 1;
+  }
 }
 .add-expense-1{
   display: flex;

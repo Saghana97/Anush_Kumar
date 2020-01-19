@@ -5,9 +5,9 @@ import SummaryYouOwn from './SummaryYouOwn'
 function SummaryList(props){
     return(
         <div style={{display:props.show.list?"flex":"none"}} className="summary-details">
-            <SummaryOwn />
+            <SummaryOwn userdata={props.userDataYou}/>
             <div className="border"></div>
-            <SummaryYouOwn />
+            <SummaryYouOwn userdata={props.userData}/>
         </div>
     )
 }

@@ -4,7 +4,7 @@ function InputWarp(props){
     return(
         <div>
             <p>{props.name}</p>
-            <input className={props.class} type={props.type} />
+            <input className={props.class} type={props.type} onChange={props.method}/>
         </div>
     )
 }

@@ -10,7 +10,8 @@ import FbLogo from './fblogo.png'
 import TwLogo from './twitter.png'
 
 
-function MenuNavActivity(){
+function MenuNavActivity(props){
+    
     return(
         <div className="left-content">
             <ul className="ul-left-content">
@@ -18,8 +19,8 @@ function MenuNavActivity(){
                 <MenuNavList url={FlagIcon} name="Recent Activity" class="li-left-content" imgClass="flag-icon"/>
                 <MenuNavList url={MenuIcon} name="All Expenses" class="li-left-content" imgClass="menu-icon"/>
             </ul>
-            <CollectionContainer name="GROUPS" description="You do not have any groups yet."/>
-            <CollectionContainer name="FRIENDS" description="You have not added any friends yet."/>
+            <CollectionContainer name="GROUPS" description={[]} tag="groups"/>
+            <CollectionContainer name="FRIENDS" description={props.expenses} description2={props.expensesYouOwe} tag="friends"/>
             <InviteFriends />
             <div style={{display:"flex",marginTop:"5px",padding:"0 5px"}}>
                 <SocialButton name="Share" url={FbLogo} class="social-btn-facebook"/>
