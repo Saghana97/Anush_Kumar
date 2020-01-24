@@ -11,7 +11,6 @@ function Home(){
     const[userData,setUserData] = useState("");
 
     useEffect(()=>{
-        document.title = "Dashboard · Splitwise"
         const token = localStorage.getItem("login-key");
         let isAvailable = true;
 
@@ -27,15 +26,15 @@ function Home(){
                     arr.push(res.data[1][0].name)
                     setUserData(arr)
                 }
-            }); 
-            if(loginAuth == "jwt expired") {
+            })
+            if(loginAuth === "jwt expired") {
                 localStorage.clear()
                 history.push("/loading")
                 setTimeout(()=>{
                     history.push("/");
                 },1700)
             }
-            if(loginAuth == "jwt must be provided") {
+            if(loginAuth === "jwt must be provided") {
                 localStorage.clear()
                 history.push("/loading")
                 setTimeout(()=>{

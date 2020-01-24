@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useEffect}from 'react'
+import { useHistory } from "react-router-dom";
 import ExpTrackerBlock from './ExpTrackerBlock';
 import Summary from "../Summary/Summary";
 
 
 function DashboardExpenseTracker(props){
+    const history = useHistory()
     var diffAmount;
     if(props.method()>props.method2()){
         diffAmount = props.method()-props.method2();
@@ -11,6 +13,11 @@ function DashboardExpenseTracker(props){
     else{
         diffAmount = props.method2()-props.method();
     }
+    useEffect(() => {
+        if(props.expenses.length<0){
+            history.push("/home/")
+        }
+    }, [])
     return(
         <div>
             <div className="dashboard-exp-track-header">
@@ -18,7 +25,7 @@ function DashboardExpenseTracker(props){
                 <ExpTrackerBlock class="dashboard-exp-track-content-center" pClass="exp-track-p-2" expType="you owe" amount={props.method2()} />
                 <ExpTrackerBlock class="dashboard-exp-track-content" pClass="exp-track-p" expType="you are owed" amount={props.method()} />
             </div>
-            <Summary userExpenses={props.expenses} userExpYouOwe={props.expensesYouOwe}/>
+            <Summary users={props.userData} userExpenses={props.expenses} method4={props.method4} userMethod={props.userMethod} meth={props.meth}/>
         </div>
     )
 }

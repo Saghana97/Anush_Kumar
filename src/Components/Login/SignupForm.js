@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useRef, useEffect} from 'react'
 import axios from 'axios'
 import Button from '../Button'
 import InputWrap from './InputWrap'
@@ -59,10 +59,14 @@ function SignupForm(props){
          })
          setTimeout(()=>props.methodState(),1000)
       }
+      const inputRef = useRef(null)
+      useEffect(() => {
+        inputRef.current.focus();
+      }, [])
     return(
         <form>
-            <h4 className="login-h4">Welcome to splitwise</h4>
-            <InputWrap class="login-input" name="Name" type="text" method={handleChangeName}/>
+            <h4 className="login-h4">Welcome to splitkaro</h4>
+            <InputWrap inputRef={inputRef} class="login-input" name="Name" type="text" method={handleChangeName}/>
             <InputWrap class="login-input" name="Email address"  type="text" method={handleChangeEmail}/>
             <InputWrap class="login-input" name="Password" type="password" method={handleChangePassword}/>
             <CountryCode method={handleChangeCode}/><InputWrap class="login-input-spl" name="Phone number" type="number" method={handleChangePhone}/>

@@ -28,8 +28,8 @@ function SummaryHeader(props){
         <div className="summary-header">
             <h2 className="summary-header-h2">you owe<span className="summary-header-span">you are owe</span></h2>
             <div className="toggle-btns-area">
-                <Button class={props.viewToggle[0].list?"toggle-btns":"toggle-btns-2"} name="view as list" url={MenuIcon} method={handleToggleList}/>  
-                <Button class={props.viewToggle[0].list?"toggle-btns-2":"toggle-btns"} name="view chart" url={ChartIcon} method={handleToggleChart}/>  
+                <Button class={props.viewToggle[0].list?"toggle-btns-left":"toggle-btns-2-left"} name="view as list" url={MenuIcon} method={handleToggleList}/>  
+                <Button class={props.viewToggle[0].list?"toggle-btns-2-right":"toggle-btns-right"} name="view chart" url={ChartIcon} method={handleToggleChart}/>  
             </div>
         </div>
     )

@@ -15,12 +15,12 @@ function MenuNavActivity(props){
     return(
         <div className="left-content">
             <ul className="ul-left-content">
-                <MenuNavList url={SplitIcon} name="Dashboard" class="li-left-content-active" imgClass="dash-icon"/>
-                <MenuNavList url={FlagIcon} name="Recent Activity" class="li-left-content" imgClass="flag-icon"/>
-                <MenuNavList url={MenuIcon} name="All Expenses" class="li-left-content" imgClass="menu-icon"/>
+                <MenuNavList url={SplitIcon} name="Dashboard" method={props.method} class={props.view[0].visibility?"li-left-content-active":"li-left-content"} imgClass="dash-icon"/>
+                <MenuNavList url={FlagIcon} name="Recent Activity" method={props.method2} class={props.view[1].visibility?"li-left-content-active":"li-left-content"} imgClass="flag-icon"/>
+                <MenuNavList url={MenuIcon} name="All Expenses" method={props.method3} class={props.view[2].visibility?"li-left-content-active":"li-left-content"} imgClass="menu-icon"/>
             </ul>
             <CollectionContainer name="GROUPS" description={[]} tag="groups"/>
-            <CollectionContainer name="FRIENDS" description={props.expenses} description2={props.expensesYouOwe} tag="friends"/>
+            <CollectionContainer method={props.userMethod} method2={props.method4} method3={props.meth} userName={props.name} name="FRIENDS" description={props.expenses} user={props.userData} tag="friends"/>
             <InviteFriends />
             <div style={{display:"flex",marginTop:"5px",padding:"0 5px"}}>
                 <SocialButton name="Share" url={FbLogo} class="social-btn-facebook"/>

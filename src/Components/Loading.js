@@ -4,13 +4,8 @@ import '../index.scss'
 function Loading(){
     return (
         <div className="loading">
-            <h1>Splitwise</h1>
-            <div className="loading-dots">
-                <p>.</p>
-                <p>.</p>
-                <p>.</p>
-            </div>
-            
+            <h1>Splitkaro</h1>
+            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
         </div>
     )
 }

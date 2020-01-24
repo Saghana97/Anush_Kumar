@@ -1,28 +1,34 @@
 import React,{ useState, useEffect } from 'react'
+import { useHistory } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch} from 'react-router-dom'
 import axios from 'axios'
 import DashboardHeader from './DashboardHeader'
 import DashboardIntro from './DashboardIntro'
 import DashboardOutro from './DashboardOutro'
 import ExpenseTracker from './Expence/ExpenseTracker'
+import Friends from './Friends/Friends'
 import ModalExpense from './ModalExpense'
 import SettleExpense from './SettleExpense'
 import MenuNavActivity from '../Menu-Navigation/MenuNavActivity'
 import Promotions from '../Promotions/Promotions'
+import RecentActivity from './RecentActivity/RecentActivity'
+import AllExpense from './AllExpense/AllExpense'
 
 
 function Dashboard(props){
 
+    const history = useHistory();
     const [view, setView] = useState([
         {
-            dash:"dash-intro",
+            dash:"dash-exp",
             visibility: true
         },
         {
-            dash:"dash-outro",
+            dash:"recent-activity",
             visibility: false
         },
         {
-            dash:"dash-exp",
+            dash:"all-expenses",
             visibility: false
         },
         {
@@ -32,52 +38,91 @@ function Dashboard(props){
             settle:false
         }
     ])
-    function handleDashVisibility(){
+    const [name,setName] = useState ("");
+    function allVisibility(){
         const currentViewModal = view.map((item) =>{
             if(item.visibility === true){
-                item.visibility = !item.visibility
-            }
-            if(item.dash === "dash-exp"){
-                item.visibility = !item.visibility
+                item.visibility = false
             }
             item.modal = false
             return item
         })
         handleView(currentViewModal)
     }
+    function handleDashboardVisibility(){
+        history.push("/home/dashboard")
+        const currentViewModal = view.map((item) =>{
+            if(item.visibility === true){
+                item.visibility = false
+            }
+            if(item.dash === "dash-exp"){
+                item.visibility = true
+            }
+            item.modal = false
+            return item
+        })
+        handleView(currentViewModal)
+        setName("")
+    }
+    function handleActivityVisibility(){
+        const currentViewModal = view.map((item) =>{
+            if(item.visibility === true){
+                item.visibility = false
+            }
+            if(item.dash === "recent-activity"){
+                item.visibility = true
+            }
+            item.modal = false
+            return item
+        })
+        setName("")
+        handleView(currentViewModal)
+        history.push("/home/activity")
+    }
+    function handleAllExpensesVisibility(){
+        history.push("/home/all")
+        const currentViewModal = view.map((item) =>{
+            if(item.visibility === true){
+                item.visibility = false
+            }
+            if(item.dash === "all-expenses"){
+                item.visibility = true
+            }
+            item.modal = false
+            return item
+        })
+        setName("")
+        handleView(currentViewModal)
+    }
     function handleView(newView){
         setView(newView)
     }
     //
+    //
     const[expenses,setExpenses] = useState([{
-        name:"",
-        description: "",
-        amount: "",
-        time:""
+        id:"",
+        user_name:"",
+        owe_name:"",
+        amount:"", 
+        description:"",
+        created_at:"",
+        updated_at:"",
+        deleted_at:"",
+        amountPaid:""
     }]);
-    const[expensesYouOwe,setExpensesYouOwe] = useState([{
-        name:"",
-        description: "",
-        amount: "",
-        time:""
-    }]);
-    const[name,setName] = useState("")
     useEffect(() => {
+        document.title = "Dashboard · Splitkaro"
         const token = localStorage.getItem("login-key");
-
         axios.post(`http://localhost:4000/expense-view`,{"data":token})
         .then(res=>{
-            console.log(res.data[0])
+            console.log(res.data)
             setExpenses(prevExpenses=>{
-                prevExpenses= res.data[0]
+                prevExpenses= res.data
                 return prevExpenses
             })
-            setExpensesYouOwe(prevExpensesYouOwe=>{
-                prevExpensesYouOwe = res.data[1]
-                return prevExpensesYouOwe
-            })
-            if(res.data[0].length &&res.data[1].length != 0){
-                handleDashVisibility()
+            if(res.data.length != 0){
+                // handleDashVisibility()
+                history.push("/home/dashboard")
                 // alert("0")
             }
         })
@@ -85,49 +130,83 @@ function Dashboard(props){
             
         };
     },[]);
-    function updateAmount(){
+    function updateAmountYouAreOwe(){
         var amount=0;
+        var amountPaid=0;
+        var prevName= " ";
         expenses.map(item=>{
-            parseFloat(amount+=parseFloat(item.amount/2))
+            if(prevName!== item.owe_name && props.user[1] != item.owe_name){
+                parseFloat(amountPaid+=parseFloat(item.amountPaid))
+                prevName=item.owe_name
+            }
         })
-        return amount
+
+        expenses.map(item=>{
+            if(props.user[1] === item.user_name)
+                parseFloat(amount+=parseFloat(item.amount/2))
+        })
+
+        return amount-amountPaid
     }
     function updateAmountYouOwe(){
         var amount=0;
-        expensesYouOwe.map(item=>{
-            parseFloat(amount+=parseFloat(item.amount/2))
-        })
-        return amount
-    }
-
-    function CustomRender(props){
-        const dashCurrent = props.viewType.map(item => {
-            if (item.visibility) {
-                if(item.dash == "dash-intro"){
-                    return <DashboardIntro key={item.dash} />
-                }
-                if(item.dash == "dash-outro"){
-                    return  <DashboardOutro key={item.dash}/>
-                }
-                if(item.dash == "dash-exp"){
-                    return <ExpenseTracker key={item.dash} method={updateAmount} expenses={expenses} expensesYouOwe={expensesYouOwe} method2={updateAmountYouOwe}/>
-                }
+        var amountPaid=0;
+        var prevName= " ";
+        expenses.map(item=>{
+            if(prevName!== item.user_name &&props.user[1] != item.user_name){
+                parseFloat(amountPaid+=parseFloat(item.amountPaid))
+                prevName=item.user_name
             }
         })
-        return dashCurrent
+        expenses.map(item=>{
+            if(props.user[1] != item.user_name)
+                parseFloat(amount+=parseFloat(item.amount/2))
+        })
+        return amount-amountPaid
+    }
+    const [userFriend,setUserFriend] = useState("loading..");
+
+    function callSetUserFriend(user){
+        setUserFriend(prevUserFriend => {
+            prevUserFriend = user;
+            return prevUserFriend
+        })
+        history.push("/home/friends")
     }
     return (
         <>
             <div className="main-content">
-                <MenuNavActivity expenses={expenses} expensesYouOwe={expensesYouOwe}/>
+                <MenuNavActivity view={view} userData={props.user} expenses={expenses} method={handleDashboardVisibility} method2={handleActivityVisibility} method3={handleAllExpensesVisibility} method4={allVisibility} userMethod={callSetUserFriend} meth={setName} name={name}/>
                 <div className="dashboard-content">
-                    <DashboardHeader method={handleView} viewType={view}/>
-                    <CustomRender viewType={view}/> 
-                    {/* <ExpenseTracker method={updateAmount} expenses={expenses}/> */}
+                    <Switch>
+                        <Route path="/home/dashboard">
+                            <DashboardHeader method={handleView} viewType={view} name="Dashboard" buttons="yes" nos="1"/>
+                            <ExpenseTracker userData={props.user} method={updateAmountYouAreOwe} method2={updateAmountYouOwe} expenses={expenses} method4={allVisibility} userMethod={callSetUserFriend} meth={setName}/>
+                        </Route>
+                        <Route exact path="/home/activity">
+                            <DashboardHeader method={handleView} viewType={view} name="Recent Activity" buttons="no"/>
+                            <RecentActivity userData={props.user[1]} expenses={expenses} />
+                        </Route>
+                        <Route path="/home/all">
+                            <DashboardHeader method={handleView} viewType={view} name="All Expenses" buttons="yes" nos="1"/>
+                            <AllExpense userData={props.user[1]} expenses={expenses}/>
+                        </Route>
+                        <Route path="/home/friends">
+                            <DashboardHeader method={handleView} viewType={view} name={userFriend} buttons="yes" nos="2"/>
+                            <Friends userData={props.user[1]} name={userFriend} expenses={expenses}/>
+                        </Route>
+                        <Route exact path="/home/">
+                            <DashboardHeader method={handleView} viewType={view} name="Dashboard" buttons="yes" nos="1"/>
+                            <DashboardIntro />
+                        </Route>
+                        <Route exact path="/home/complete">
+                            <DashboardOutro />
+                        </Route>
+                    </Switch>
                 </div>
                 <Promotions/>
                 <ModalExpense method={handleView} viewModal={view} user={props.user}/>
-                <SettleExpense method={handleView} viewModal={view}/>
+                <SettleExpense name={userFriend} method={handleView} expenses={expenses} viewModal={view} user={props.user[1]}/>
             </div>
         </>
     )

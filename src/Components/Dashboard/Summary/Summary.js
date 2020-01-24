@@ -16,8 +16,8 @@ function Summary(props){
     return(
         <div className="summary">
             <SummaryHeader viewToggle={toggle} handTog={handeToggle} userData={props.userExpenses} />
-            <SummaryList show={toggle[0]} userData={props.userExpenses} userDataYou={props.userExpYouOwe}/>
-            <SummaryChart show={toggle[0]} userData={props.userExpenses} userDataYou={props.userExpYouOwe}/>
+            <SummaryList show={toggle[0]} userData={props.userExpenses} currentUser={props.users[1]} method4={props.method4} userMethod={props.userMethod} meth={props.meth} />
+            <SummaryChart show={toggle[0]} userData={props.userExpenses} currentUser={props.users[1]} method3={props.method4} method={props.userMethod} method2={props.meth}/>
         </div>
     )
 }
