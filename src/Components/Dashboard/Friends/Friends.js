@@ -16,6 +16,7 @@ function Friends(props){
         }
     })
     var amoutPaid=0;
+    var amoutPaidBy=0;
     var preName = ""
     props.expenses.map(item=>{
         if(item.user_name === props.name || item.owe_name === props.name){
@@ -25,10 +26,19 @@ function Friends(props){
           }
         }
     })
+    props.expenses.map(item=>{
+        if(item.user_name === props.name || item.owe_name === props.name){
+          if(preName !== item.user_name){
+            amoutPaidBy+=parseFloat(item.amountPaidBy)
+            preName = item.user_name
+          }
+        }
+    })
     return(
         <div>
             <div className="amount-paid">
-                <p>Amount Paid: <span>${amoutPaid}</span></p>
+                <p className="amount-paid-p">Amount Paid by you: <span>${amoutPaid}</span></p>
+                <p className="amount-paid-p-1">Amount Paid by {props.name}: <span>${amoutPaidBy}</span></p>
             </div>
             {expensesOwe}
         </div>

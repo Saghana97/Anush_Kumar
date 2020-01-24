@@ -16,6 +16,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: $theme;
 }
+body::selection {
+  color: white;
+  background: #ffc0cbfa; //pink color
+}
 button{
   outline: none;
   font-family: 'Lato', sans-serif;
@@ -1291,10 +1295,17 @@ hr{
 }
 //frnds
 .amount-paid{
-  padding: 10px;
+  display: flex;
+  padding: 20px;
   font-size: 14px;
   text-align: center;
   border-bottom: 1px solid $theme-smoke;
+}
+.amount-paid-p{
+  margin-left: 0;
+}
+.amount-paid-p-1{
+  margin-left: auto;
 }
 .amount-paid span{
   color: $base-color;

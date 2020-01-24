@@ -24,11 +24,11 @@ function SummaryYouOwn(props){
             for(let j in filter){
                 amount+=parseFloat(filter[j].amount);
             }
-            summaryYouOwn.push(<SummaryOwnContent onclick={()=>{props.method(filter[0].owe_name);props.method3(filter[0].owe_name);props.method2()}} key={filter[0].owe_name} aClass="sumary-you-own-inside-p" url={bool?ProfileImg1:ProfileImg2} amount={(amount)/2-filter[0].amountPaid} name={filter[0].owe_name} context="owes you "/>)
+            summaryYouOwn.push(<SummaryOwnContent onclick={()=>{props.method(filter[0].owe_name);props.method3(filter[0].owe_name);props.method2()}} key={filter[0].owe_name} aClass="sumary-you-own-inside-p" url={bool?ProfileImg1:ProfileImg2} amount={(amount)/2-filter[0].amountPaidBy} name={filter[0].owe_name} context="owes you "/>)
         }
         else{
-            if(parseFloat(filter[0].amount)/2-filter[0].amountPaid > 0)
-                summaryYouOwn.push(<SummaryOwnContent onclick={()=>{props.method(filter[0].owe_name);props.method3(filter[0].owe_name);props.method2()}} key={filter[0].owe_name} aClass="sumary-you-own-inside-p" url={bool?ProfileImg1:ProfileImg2} amount={parseFloat(filter[0].amount)/2-filter[0].amountPaid} name={filter[0].owe_name} context="owes you "/>)
+            if(parseFloat(filter[0].amount)/2-filter[0].amountPaidBy > 0)
+                summaryYouOwn.push(<SummaryOwnContent onclick={()=>{props.method(filter[0].owe_name);props.method3(filter[0].owe_name);props.method2()}} key={filter[0].owe_name} aClass="sumary-you-own-inside-p" url={bool?ProfileImg1:ProfileImg2} amount={parseFloat(filter[0].amount)/2-filter[0].amountPaidBy} name={filter[0].owe_name} context="owes you "/>)
         }
         bool=!bool;
     }

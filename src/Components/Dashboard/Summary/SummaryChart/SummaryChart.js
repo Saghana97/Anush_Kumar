@@ -22,11 +22,11 @@ function SummaryChart(props){
             for(let j in filter){
                 amount+=parseFloat(filter[j].amount);
             }
-            summaryChartYouOwn.push(<SummaryChartYouOwn onclick={()=>{props.method(filter[0].owe_name);props.method3(filter[0].owe_name);props.method2()}} key={filter[0].owe_name} aClass="chart-you-are-owe-inside"  amount={(amount)/2-filter[0].amountPaid} name={filter[0].owe_name}/>)
+            summaryChartYouOwn.push(<SummaryChartYouOwn onclick={()=>{props.method(filter[0].owe_name);props.method3(filter[0].owe_name);props.method2()}} key={filter[0].owe_name} aClass="chart-you-are-owe-inside"  amount={(amount)/2-filter[0].amountPaidBy} name={filter[0].owe_name}/>)
         }
         else{
-            if(parseFloat(filter[0].amount)/2-filter[0].amountPaid > 0)
-                summaryChartYouOwn.push(<SummaryChartYouOwn onclick={()=>{props.method(filter[0].owe_name);props.method3(filter[0].owe_name);props.method2()}} key={filter[0].owe_name} aClass="chart-you-are-owe-inside"  amount={parseFloat(filter[0].amount)/2-filter[0].amountPaid} name={filter[0].owe_name}/>)
+            if(parseFloat(filter[0].amount)/2-filter[0].amountPaidBy > 0)
+                summaryChartYouOwn.push(<SummaryChartYouOwn onclick={()=>{props.method(filter[0].owe_name);props.method3(filter[0].owe_name);props.method2()}} key={filter[0].owe_name} aClass="chart-you-are-owe-inside"  amount={parseFloat(filter[0].amount)/2-filter[0].amountPaidBy} name={filter[0].owe_name}/>)
         }
     }
     var arr2= [];

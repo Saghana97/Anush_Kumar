@@ -108,6 +108,7 @@ function Dashboard(props){
         created_at:"",
         updated_at:"",
         deleted_at:"",
+        amountPaidBy:"",
         amountPaid:""
     }]);
     useEffect(() => {
@@ -133,19 +134,17 @@ function Dashboard(props){
     function updateAmountYouAreOwe(){
         var amount=0;
         var amountPaid=0;
-        var prevName= " ";
+        var prevName= [];
         expenses.map(item=>{
-            if(prevName!== item.owe_name && props.user[1] != item.owe_name){
-                parseFloat(amountPaid+=parseFloat(item.amountPaid))
-                prevName=item.owe_name
+            if(prevName.indexOf(item.owe_name)=== -1 && props.user[1] === item.user_name){
+                prevName.push(item.owe_name)
+                parseFloat(amountPaid+=parseFloat(item.amountPaidBy))
             }
         })
-
         expenses.map(item=>{
             if(props.user[1] === item.user_name)
                 parseFloat(amount+=parseFloat(item.amount/2))
         })
-
         return amount-amountPaid
     }
     function updateAmountYouOwe(){
