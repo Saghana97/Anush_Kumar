@@ -4,7 +4,7 @@ import RecentActivityDetails from './RecentActivityDetils'
 function RecentActivity(props){
     var i=0
     useEffect(() => {
-        document.title = "Recent Activity · Splitkaro"
+        document.title = "Recent Activity · Splitpannunga"
     }, [])
     const expensesOwe = props.expenses.map(item=>{
         if(props.userData === item.user_name)

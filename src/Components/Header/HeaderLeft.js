@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from './split-karo.png'
+import Logo from './split-panunga.png'
 
 
 function HeaderLeft(){

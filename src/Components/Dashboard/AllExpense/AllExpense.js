@@ -4,7 +4,7 @@ import AllExpenseDetails from './AllExpenseDetails'
 function AllExpense(props){
     var i=0
     useEffect(() => {
-        document.title = "All Expenses · Splitkaro"
+        document.title = "All Expenses · Splitpannunga"
     }, [])
     const expensesOwe = props.expenses.map(item=>{
         var month = item.created_at.substr(4,4);

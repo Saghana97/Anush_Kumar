@@ -77,7 +77,7 @@ function LoginForm(){
       }, [])
     return(
         <form>
-            <h4 className="login-h4">Welcome to splitkaro</h4>
+            <h4 className="login-h4">Welcome to splitpannunga</h4>
             <InputWrap inputRef={inputRef} class="login-input" name="Email address" method={handleloginEmail} type="text"/>
             <InputWrap class="login-input" name="Password" method={handleloginPassword} type="password"/>
             <Button class="log-btn" name="Log in" onclickmeth={loginAuthentication}/>

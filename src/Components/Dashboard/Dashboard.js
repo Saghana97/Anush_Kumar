@@ -111,7 +111,7 @@ function Dashboard(props){
         amountPaid:""
     }]);
     useEffect(() => {
-        document.title = "Dashboard · Splitkaro"
+        document.title = "Dashboard · Splitpannunga"
         const token = localStorage.getItem("login-key");
         axios.post(`http://localhost:4000/expense-view`,{"data":token})
         .then(res=>{

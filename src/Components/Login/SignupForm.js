@@ -65,7 +65,7 @@ function SignupForm(props){
       }, [])
     return(
         <form>
-            <h4 className="login-h4">Welcome to splitkaro</h4>
+            <h4 className="login-h4">Welcome to splitpannunga</h4>
             <InputWrap inputRef={inputRef} class="login-input" name="Name" type="text" method={handleChangeName}/>
             <InputWrap class="login-input" name="Email address"  type="text" method={handleChangeEmail}/>
             <InputWrap class="login-input" name="Password" type="password" method={handleChangePassword}/>
