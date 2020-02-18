@@ -5,7 +5,7 @@ import img from './profile3.jpeg'
 function Friends(props){
     return(
         <div className="friends">
-            <img className="friends-image" src={img} alt="profile image"/>
+            <img className="friends-image" src={props.img} alt={props.img}/>
             <div className="friends-inside">
                 <div>
                     <p className="friends-bold-name">{props.name}</p>

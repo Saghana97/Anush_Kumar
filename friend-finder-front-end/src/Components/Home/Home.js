@@ -1,5 +1,6 @@
 import React,{useEffect,useCallback,useState} from 'react'
 import { connect } from 'react-redux';
+import { Route, Switch} from 'react-router-dom'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 import store from '../../Controllers/Store/store'
@@ -7,10 +8,20 @@ import * as actions from '../../Controllers/Actions/Actions'
 import TopNav from './TopNav'
 import FriendRecomendation from './FriendRecomendation';
 import Friends from './Friends'
+import Settings from '../Settings/Settings'
+import images from '../../ProfileImagesPath'
+import MessageHeadCollection from '../Chat/MessageHeadCollection'
+import FriendRecomendationLoader from '../Loaders/FriendRecomendationLoader'
+import FriendLoader from '../Loaders/FriendLoader'
+
 
 function Home(){
     const history = useHistory()
     const [name,setName] = useState("");
+    const [imgUrl,setImgUrl] = useState("");
+    const [loading,setLoading] = useState(true)
+    const noProfile = '/ProfileImages/user.jpeg';
+
     useEffect(() => {
         var isLoad = true;
         async function loadData (){
@@ -29,18 +40,30 @@ function Home(){
                     sessionStorage.clear()
                     history.push('/');
                 }
-                store.dispatch(actions.addUserName(res.data.name))
+                // console.log(res.data)
+                store.dispatch(actions.addUserName(res.data.user))
                 store.dispatch(actions.addAllRecommendedFriends(res.data.userData))
                 store.dispatch(actions.addFriendRequests(res.data.friendRequests))
                 store.dispatch(actions.addFriends(res.data.friends))
                 try{
-                    if (isLoad) setName(store.getState().setName[0].name)
+                    if (isLoad) {
+                        setName(store.getState().setName[0].name.name);
+                        setImgUrl(store.getState().setName[0].name.image)
+                    }
                 }
                 catch(err){
                     console.log(err.message);
                 }
             })
             .catch( err => {alert(err)}) 
+            setTimeout(() => {
+                if(isLoad){
+                    setLoading(prev=>{
+                        prev = false
+                        return prev
+                    });
+                }
+            }, 1000);
         }
         loadData()
         return( () => {
@@ -53,6 +76,10 @@ function Home(){
         () => { return name },
     [name],)
 
+    const img = useCallback(
+        () => { return imgUrl },
+    [imgUrl],)
+
     function sendFriendRequest(id){
         let details = {}
         details = {
@@ -64,20 +91,34 @@ function Home(){
         .catch(err=>alert(err.message))
     }
 
-    var friendsAvailable;
+    var friendsAvailable = [];
+    let srci = "";
     try{ 
-        friendsAvailable = store.getState().setFriends[0].details.map(items=>{
-            return <FriendRecomendation key={items.id} status={items['friendRequests.status']} name={items.userName} mutual="-" method={sendFriendRequest} id={items.id}/>
+        store.getState().setFriends[0].details.map(items=>{
+            for(let i in images){
+                if(items.profileImageUrl === images[i].name){
+                    srci= images[i].src
+                }
+            }
+            friendsAvailable.push(<FriendRecomendation img={srci?src:noProfile} key={items.id} status={items['friendRequests.status']} name={items.userName} mutual="-" method={sendFriendRequest} id={items.id}/>)
+            srci=""
         })
     }
     catch(err){
         console.log(err.message)
     }
 
-    var friends = [];
+    let friends = [];
+    let src = "";
     try{ 
-        friends = store.getState().setFriendsForUser[0].details.map(items=>{
-            return <Friends key={items.id} name={items.userName} id={items.id} mutual={items.mutualFriends} friends={items.friends}/>
+        store.getState().setFriendsForUser[0].details.map(items=>{
+            for(let i in images){
+                if(items.profileImageUrl === images[i].name){
+                    src= images[i].src
+                }
+            }
+            friends.push(<Friends img={src?src:noProfile} key={items.id} name={items.userName} id={items.id} mutual={items.mutualFriends} friends={items.friends}/>)
+            src=""
         })
         if(friends.length<1){
             friends.push(<p className="friends-inside" key="1">No friends yet. Try to connect with other people.</p>)
@@ -87,28 +128,68 @@ function Home(){
         console.log(err.message)
     }
 
+    
+
+    function loadRecomend(){
+        if(loading)
+            return (
+                <>
+                    <FriendRecomendationLoader />
+                    <FriendRecomendationLoader />
+                    <FriendRecomendationLoader />
+                    <FriendRecomendationLoader />
+                    <FriendRecomendationLoader />
+                    <FriendRecomendationLoader />
+                </>
+            )
+        else
+            return friendsAvailable
+    }
+
+    function loadFriends(){
+        if(loading)
+            return (
+                <>
+                    <FriendLoader />
+                    <FriendLoader />
+                    <FriendLoader />
+                    <FriendLoader />
+                    <FriendLoader />
+                </>
+            )
+        else
+            return friends
+    }
 
     return(
         <div className="home">
-            <TopNav name={names()}/>            
-            <div className="home-main-content">
-                <div className="home-friends">
-                    <p>Friends</p>
-                    <div>
-                        {friends}
+            <TopNav name={names()} image={img()}/>  
+            <Switch>
+                <Route exact path="/home">
+                    <div className="home-main-content">
+                        <div className="home-friends">
+                            <p>Friends</p>
+                            <div>
+                                {loadFriends()}
+                            </div>
+                        </div>
+                        <div className="home-people-you-may-know">
+                            <p>People you may know</p>
+                            <div className="people-you-may-know-friends">
+                            <div className="loader"></div>
+                                {loadRecomend()}                                
+                            </div>
+                            <div className="friend-requests-footer">
+                                <p>see all</p>
+                            </div>          
+                        </div>
+                        <MessageHeadCollection />
                     </div>
-                </div>
-                <div className="home-people-you-may-know">
-                    <p>People you may know</p>
-                    <div className="people-you-may-know-friends">
-                    <div className="loader"></div>
-                        {friendsAvailable}
-                    </div>
-                    <div className="friend-requests-footer">
-                        <p>see all</p>
-                    </div>
-                </div>
-            </div>
+                </Route>
+                <Route path="/home/settings">
+                    <Settings/>
+                </Route>
+            </Switch>
         </div>
     )
 }

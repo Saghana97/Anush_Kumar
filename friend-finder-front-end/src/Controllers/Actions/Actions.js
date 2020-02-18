@@ -21,3 +21,7 @@ export function addFriendRequests(details){
 export function addFriends(details){
     return {type:"ADD_FRIENDS", friends: details}
 }
+
+export function searchFriends(details){
+    return {type:"ADD_SEARCH", friends: details}
+}

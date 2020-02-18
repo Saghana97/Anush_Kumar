@@ -18,7 +18,7 @@ function FriendRecomendation(props){
     }
     return(
         <div className="people-you-may-know-friends-div">
-            <img className="friend-profile-image" src={img} alt="propfile image"/>
+            <img className="friend-profile-image" src={props.img} alt="propfile of friend"/>
             <div>
                 <p className="friend-name">{props.name}</p>
                 <p className="mutual-friends"><span>{props.mutual}</span> mutual friends</p>

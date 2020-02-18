@@ -4,7 +4,7 @@ import img from './profile3.jpeg'
 function HiddenFriendRequestNotifications(props){
     return (
         <div className="friend-request-notifications">
-            <img className="friend-request-img" src={img} alt="profile image"/>
+            <img className="friend-request-img" src={img} alt="profile"/>
             <div className="friend-request-name">
                 <p className="friend-request-notifications-p">{props.name}</p>
                 <p>- mutual friends</p>

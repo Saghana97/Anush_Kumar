@@ -76,7 +76,7 @@ router.post('/check-login',async function(req,res){
         console.log("exec current user query\n")
         //retrive current user
         const currentUser = await models.users.findAll({
-            attributes: ['id', 'name', 'userName' ],
+            attributes: ['id', 'name', 'userName','profileImageUrl' ],
             where:{
                 name:decoded.userData.toString()
             },
@@ -139,7 +139,7 @@ router.post('/check-login',async function(req,res){
         // console.log(userDetails)
 
         //get all friends
-        const friends = await sequelize.query(`SELECT users.id , name , "userName" FROM users LEFT JOIN "friendRequests" ON users.id = "friendRequests"."requestToId" WHERE "friendRequests"."requestId" = :id UNION SELECT users.id , name , "userName" FROM users LEFT JOIN "friendRequests" ON users.id = "friendRequests"."requestId" WHERE "friendRequests"."requestToId" = :id`,{
+        const friends = await sequelize.query(`SELECT users.id , name , "userName","profileImageUrl" FROM users LEFT JOIN "friendRequests" ON users.id = "friendRequests"."requestToId" WHERE "friendRequests"."requestId" = :id and "friendRequests"."status" = 'accepted' UNION SELECT users.id , name , "userName","profileImageUrl" FROM users LEFT JOIN "friendRequests" ON users.id = "friendRequests"."requestId" WHERE "friendRequests"."requestToId" = :id and "friendRequests"."status" = 'accepted'`,{
             replacements:{id:currentUser[0].id},
             type: QueryTypes.SELECT,
             raw:true
@@ -157,8 +157,8 @@ router.post('/check-login',async function(req,res){
                 replacements:{id:currentUser[0].id, other_id:friends[i].id},
                 type: QueryTypes.SELECT,
                 raw:true
-            });
-            let friendsForOthers = await sequelize.query(`SELECT users.id , name , "userName" FROM users LEFT JOIN "friendRequests" ON users.id = "friendRequests"."requestToId" WHERE "friendRequests"."requestId" = :id UNION SELECT users.id , name , "userName" FROM users LEFT JOIN "friendRequests" ON users.id = "friendRequests"."requestId" WHERE "friendRequests"."requestToId" = :id`,{
+            }); 
+            let friendsForOthers = await sequelize.query(`SELECT users.id , name , "userName","profileImageUrl" FROM users LEFT JOIN "friendRequests" ON users.id = "friendRequests"."requestToId" WHERE "friendRequests"."requestId" = :id UNION SELECT users.id , name , "userName","profileImageUrl" FROM users LEFT JOIN "friendRequests" ON users.id = "friendRequests"."requestId" WHERE "friendRequests"."requestToId" = :id`,{
                 replacements:{id:friends[i].id},
                 type: QueryTypes.SELECT,
                 raw:true
@@ -198,7 +198,7 @@ router.post('/check-login',async function(req,res){
         //send total response
         message = {
             message:"success",
-            name:decoded.userData,
+            user:{name:decoded.userData,image:currentUser[0].profileImageUrl},
             userData:recomendFriendsArr,
             friendRequests:friendRequestsArr,
             friends
@@ -210,7 +210,7 @@ router.post('/check-login',async function(req,res){
         console.log(err.message)
         message = {
             message:err.message,
-            name:"",
+            user:{},
             userData:[],
             friendRequests:[],
             friends:[]

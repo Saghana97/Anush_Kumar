@@ -18,7 +18,7 @@ function SignIn(){
         if(sessionStorage.getItem('key')){
             history.push("/home")
         }
-    }, [])
+    }, [history])
     const [error,setError] = useState('')
     const renderError = useCallback(
         () => {

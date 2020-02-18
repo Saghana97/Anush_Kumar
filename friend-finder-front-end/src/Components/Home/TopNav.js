@@ -3,18 +3,23 @@ import { connect } from 'react-redux';
 import store from '../../Controllers/Store/store'
 import * as actions from '../../Controllers/Actions/Actions'
 import axios from 'axios'
-import img from './profile3.jpeg'
 import {useHistory} from 'react-router-dom'
 import HiddenFriendRequestNotifications from './HiddenFriendRequestNotifications'
-import Input from '../Input'
+import Input from '../Input'    
+import setImages from '../../ProfileImagesPath'
 
 
 function TopNav(props){
-    const history = useHistory()
-    const inputRef = useRef(null)
+    const history = useHistory();
+    const inputRef = useRef(null);
+    const noProfile = '/ProfileImages/user.jpeg';
 
-    const [settings,setSetting] = useState(false)
-    const [friends,setFriends] = useState(false)
+    const [settings,setSetting] = useState(false);
+    const [friends,setFriends] = useState(false);
+    const [search,setSearch] = useState("");
+    const [searchDetails,setSearchDetails] = useState({
+        details:""
+    });
 
     function handleToggleSetting(){
         setSetting(prevSettings=>{
@@ -43,7 +48,12 @@ function TopNav(props){
                     <div className="hidden-menu settings">
                         <span className="beacon"></span>
                         <div className="hidden-menu-inside">
-                            <p onClick={()=>{sessionStorage.clear();history.push('/')}}>Log Out</p>
+                            <div className="hidden-menu-inside-p">
+                                <p onClick={()=>{setSetting(false);setFriends(false);history.push('/home/settings')}}>Settings</p>
+                            </div>
+                            <div className="hidden-menu-inside-p">
+                                <p onClick={()=>{setSetting(false);setFriends(false);sessionStorage.clear();history.push('/')}}>Log Out</p>
+                            </div>
                         </div>
                     </div>
                 )
@@ -81,7 +91,7 @@ function TopNav(props){
                     </div>
                 )
         },
-        [friends],
+        [friends,requests],
     )
     
     function acceptFriendRequest(event){
@@ -102,19 +112,95 @@ function TopNav(props){
         console.log(err.message)
     }
 
+    function handleSearch(event){
+        event.persist();
+        setSearch(prev=>{
+            prev = event.target.value;
+            return prev
+        })
+        // console.log(search)
+        if(search.toString().length !== 0)
+        sendSearch()    
+    }
+
+    async function sendSearch(){
+        axios.post('http://localhost:4000/search-friends',[search])
+        .then(res=>{
+            console.log(res.data);
+            setSearchDetails(prevDetails=>{
+                prevDetails.details = ""
+                prevDetails.details = res.data
+                return prevDetails
+            })
+        })
+        .catch(err=>{
+            alert(err.message)
+        })
+    }
+    const renderFooter = useCallback(
+        () => {
+            return search
+        },
+        [search],
+    )
+    let renderSearchNames;
+    try{
+        renderSearchNames = searchDetails.details.map(items=>{
+            return <li key={items.id} name={items.id} className="search-friends-hidden-box-li">{items.userName}</li>
+        }) 
+    }
+    catch(err){
+        console.log(err.message)
+    }
+    function renderSearch(){
+        if(search.toString().length <=1 && search.toString().length >0){
+            return (
+                <div className="search-friends-hidden-box">
+                    <ul className="search-friends-hidden-box-ul">
+                        <li className="search-friends-hidden-box-li">No results</li>
+                    </ul>
+                </div>
+            )
+        }
+        else if(search.toString().length === 0){
+            return("")
+        }
+        else{
+            return (
+                <div className="search-friends-hidden-box">
+                    <ul className="search-friends-hidden-box-ul">
+                        {renderSearchNames}
+                        <li className="search-friends-hidden-box-li">see all results for {renderFooter()}</li>
+                    </ul>
+                </div>
+            )
+        }
+    }
+    let imge; 
+    try{
+        imge = setImages.map(({id,src,name,alt})=>{
+            if(props.image.toString() === name.toString()){
+                return <img key={id} className="profile-img" src={src} alt="current user profile."/>
+            }
+        })
+    }
+    catch(err){
+        console.log(err.message)
+    }
+
     useEffect(() => {        
         inputRef.current.focus();
     }, [])
     return(
         <div className="home-top-nav">
             <div className="top-nav-margin"> 
-                <h1>f</h1>
+                <h1 onClick={()=>{setSetting(false);setFriends(false);history.push('/home')}}>f</h1>
                 <div className="top-nav-search-div">
-                    <Input inputRef={inputRef} class="top-nav-search" text="Search"/>
-                    <button className="search-btn"><i className="fa fa-search" aria-hidden="true"></i></button>
+                    <Input method={handleSearch} name="searchName" inputRef={inputRef} type="text" class="top-nav-search" text="Search"/>
+                    {renderSearch()}
                 </div>
                 <div className="top-nav-right">
-                    <img className="profile-img" src={img} alt="current user profile."/>
+                    {imge?imge:<img className="profile-img" src={noProfile} alt="not profile"/>}
                     <p className="profile-name">{props.name}</p>
                     <ul className="home-top-nav-list">
                         <li><i className="fa fa-bell"></i></li>

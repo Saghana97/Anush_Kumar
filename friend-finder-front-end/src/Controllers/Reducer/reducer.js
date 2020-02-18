@@ -70,12 +70,24 @@ function setFriendsForUser(state = [], action){
   }
 }
 
+function setSearchFriends(state = [], action){
+  switch(action.type){
+    case "ADD_SEARCH":
+        return [
+          { details:action.friends }
+        ]
+    default:
+      return state
+  }
+}
+
 const reducer = combineReducers({
   loginApp,
   setName,
   setFriends,
   setFriendsRequsts,
-  setFriendsForUser
+  setFriendsForUser,
+  setSearchFriends
 })
 
 export default reducer
