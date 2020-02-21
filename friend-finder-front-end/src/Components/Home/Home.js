@@ -167,6 +167,14 @@ function Home(props){
             <Switch>
                 <Route exact path="/home">
                     <div className="home-main-content">
+                        <div className="nav">
+                            <ul className="nav-list">
+                                <li>Home</li>
+                                <li>News feed</li>
+                                <li>Messenger</li>
+                                <li>Watch</li>
+                            </ul>
+                        </div>
                         <div className="home-friends">
                             <p>Friends</p>
                             {loadFriends()}

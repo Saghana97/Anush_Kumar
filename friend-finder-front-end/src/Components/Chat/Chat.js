@@ -1,12 +1,8 @@
 import React,{useState,useEffect,useRef,useCallback} from 'react'
 import { connect } from 'react-redux';
-import axios from "axios";
-import openSocket from 'socket.io-client';
-import store from '../../Controllers/Store/store'
 import * as actions from '../../Controllers/Actions/Actions'
 
 function Chat(props){
-    // const socket = openSocket('http://localhost:5000');
 
     let messages =[]
     const messagesEndRef = useRef(null)
@@ -14,7 +10,6 @@ function Chat(props){
 
     useEffect(() => {
         messagesEndRef.current.scrollIntoView()
-        // console.log(props.details)
     }, [messages])
 
     function handleChange(event){
@@ -28,22 +23,6 @@ function Chat(props){
     function sendMessage(event){
         event.preventDefault()
         props.chat(sessionStorage.getItem('key'),props.details.id,inputMessage,true)
-        // socket.emit('sendMessage', {thread,message:inputMessage});
-        
-        
-
-        // console.log(sessionStorage.getItem('key'),props.details.id,inputMessage)
-        // axios.post(`http://localhost:4000/send-friend-request/send-message`,{key:sessionStorage.getItem('key'),member:props.details.id,message:inputMessage})
-        // .then(res=>{
-        //     console.log(res)
-        // })
-        // .catch(err=>{
-        //     alert(err.message)
-        // })
-        
-        // socket.emit("initial_data",{key:sessionStorage.getItem('key'),member:props.details.id,message:inputMessage},function(res){
-        //     console.log(res)
-        // });
         setInputMessage(prev=>{
             prev = ""
             return prev

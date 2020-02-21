@@ -5,14 +5,12 @@ import setImages from '../../ProfileImagesPath'
 import Loader from '../Loaders/ChatLoader'
 import MessageHeads from "./MessageHeads";
 import openSocket from 'socket.io-client';
-import store from '../../Controllers/Store/store'
 import { connect } from 'react-redux';
 import * as actions from '../../Controllers/Actions/Actions'
 
 function MessageHeadCollection(props){
     const socket = openSocket('http://localhost:5000');
     const [chatHead,setChatHead] = useState([])
-    const [messageHead,setMessageHead] = useState([])
     const [loading,setLoading] = useState(true)
 
     const [toggle,setToggle] = useState(false)
@@ -21,7 +19,6 @@ function MessageHeadCollection(props){
         name:"",
         id:""
     })
-    const [flag,setFlag] = useState(false);
 
     function callToChat(key,id,message,isChat){
         if(isChat){
@@ -52,11 +49,6 @@ function MessageHeadCollection(props){
             socket.emit('join_to_chat', {key,id,isChat})
         }
     }
-    function chat(key,id,message,isChat){
-        // console.log(props.state.setThread[0].thread,message)
-        
-    }
-
     useEffect(() => {
         var isLoad = true
         async function getData() {
@@ -94,7 +86,7 @@ function MessageHeadCollection(props){
                 if(setImages[i].name === items.threadDetails['profileImageUrl'])
                     imge = setImages[i].src
             }
-            return <MessageHeads key={items.threadDetails.id} id={items.threadDetails.id} callToChat={callToChat} chat={chat} onclick={openChat} setname={setName} name={items.threadDetails['userName']} img={imge}/>
+            return <MessageHeads key={items.threadDetails.id} id={items.threadDetails.id} callToChat={callToChat} onclick={openChat} setname={setName} name={items.threadDetails['userName']} img={imge}/>
         })
     }
     catch(err){
