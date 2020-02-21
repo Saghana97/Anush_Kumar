@@ -114,9 +114,11 @@ router.post('/chat-heads',async function(req,res){
             let threadAss = {}
             let ThreadArr = [] 
             threads.map(items=>{
+                console.log("in frineds",items)
                 for(let i in allUserDetails){
                     if(parseInt(items.members[0]) === allUserDetails[i].id){
                         threadAss = { 
+                            id:items['_id'],
                             threadDetails: allUserDetails[i],
                             created_at: items['created_at'],
                             messages: items['threadMessages']
@@ -126,6 +128,7 @@ router.post('/chat-heads',async function(req,res){
                     }
                     if(parseInt(items.members[1]) === allUserDetails[i].id){
                         threadAss = {
+                            id:items['_id'],
                             threadDetails: allUserDetails[i],
                             created_at: items['created_at'],
                             messages: items['threadMessages']

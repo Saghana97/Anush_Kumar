@@ -22,6 +22,6 @@ export function addFriends(details){
     return {type:"ADD_FRIENDS", friends: details}
 }
 
-export function searchFriends(details){
-    return {type:"ADD_SEARCH", friends: details}
+export function addThread(details){
+    return {type:"ADD_THREAD", details}
 }

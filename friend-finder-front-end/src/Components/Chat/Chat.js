@@ -1,9 +1,12 @@
 import React,{useState,useEffect,useRef,useCallback} from 'react'
+import { connect } from 'react-redux';
 import axios from "axios";
 import openSocket from 'socket.io-client';
+import store from '../../Controllers/Store/store'
+import * as actions from '../../Controllers/Actions/Actions'
 
 function Chat(props){
-    const socket = openSocket('http://localhost:5000');
+    // const socket = openSocket('http://localhost:5000');
 
     let messages =[]
     const messagesEndRef = useRef(null)
@@ -24,12 +27,9 @@ function Chat(props){
 
     function sendMessage(event){
         event.preventDefault()
-
-
-        socket.emit('setUsername', {send:inputMessage,name:props.name});
-        socket.on('userExists', function(data) {
-            console.log(data)
-        });
+        props.chat(sessionStorage.getItem('key'),props.details.id,inputMessage,true)
+        // socket.emit('sendMessage', {thread,message:inputMessage});
+        
         
 
         // console.log(sessionStorage.getItem('key'),props.details.id,inputMessage)
@@ -50,38 +50,43 @@ function Chat(props){
         })
     }
 
-    props.messages.map(items=>{
-        if(props.name === items.threadDetails['userName']){
-            let group="",temp="";
-            for(let i in items.messages){
-                var localDate = new Date(items.messages[i].date);
-                if(items.messages[i].date.substr(8,2)+items.messages[i].date.substr(4,4)+items.messages[i].date.substr(0,4) === new Date().getDate()+'-'+(new Date().getMonth()+1<=9?0+(new Date().getMonth()+1).toString():new Date().getMonth()+1)+'-'+new Date().getFullYear()){
-                    group = "Today"
-                }   
-                else{
-                    group = localDate.toString().substr(0,15)
+    try{
+        props.messages.map(items=>{
+            if(props.name === items.threadDetails['userName']){
+                let group="",temp="";
+                for(let i in items.messages){
+                    var localDate = new Date(items.messages[i].date);
+                    if(items.messages[i].date.substr(8,2)+items.messages[i].date.substr(4,4)+items.messages[i].date.substr(0,4) === new Date().getDate()+'-'+(new Date().getMonth()+1<=9?0+(new Date().getMonth()+1).toString():new Date().getMonth()+1)+'-'+new Date().getFullYear()){
+                        group = "Today"
+                    }   
+                    else{
+                        group = localDate.toString().substr(0,15)
+                    }
+                    // console.log(localDate)
+                    if(group !== temp){
+                        messages.push(
+                            <span key={i}>
+                                <p className="group-by-time">{group}</p>
+                                <div className={parseInt(items.messages[i].send) === parseInt(items.threadDetails.id)?"chat-thread-opposite":"chat-thread-current"}>{items.messages[i].message}<p className={parseInt(items.messages[i].send) === parseInt(items.threadDetails.id)?"chat-date-opposite":"chat-date-current"}>{localDate.toString().substr(15,6)}</p></div>
+                            </span>
+                        )
+                    }
+                    else{
+                        messages.push(
+                            <span key={i}>
+                                <div className={parseInt(items.messages[i].send) === parseInt(items.threadDetails.id)?"chat-thread-opposite":"chat-thread-current"}>{items.messages[i].message}<p className={parseInt(items.messages[i].send) === parseInt(items.threadDetails.id)?"chat-date-opposite":"chat-date-current"}>{localDate.toString().substr(15,6)}</p></div>
+                            </span>
+                        )
+                    }
+                    temp = group
+                    
                 }
-                // console.log(localDate)
-                if(group !== temp){
-                    messages.push(
-                        <span key={i}>
-                            <p className="group-by-time">{group}</p>
-                            <div className={parseInt(items.messages[i].send) === parseInt(items.threadDetails.id)?"chat-thread-opposite":"chat-thread-current"}>{items.messages[i].message}<p className={parseInt(items.messages[i].send) === parseInt(items.threadDetails.id)?"chat-date-opposite":"chat-date-current"}>{localDate.toString().substr(15,6)}</p></div>
-                        </span>
-                    )
-                }
-                else{
-                    messages.push(
-                        <span key={i}>
-                            <div className={parseInt(items.messages[i].send) === parseInt(items.threadDetails.id)?"chat-thread-opposite":"chat-thread-current"}>{items.messages[i].message}<p className={parseInt(items.messages[i].send) === parseInt(items.threadDetails.id)?"chat-date-opposite":"chat-date-current"}>{localDate.toString().substr(15,6)}</p></div>
-                        </span>
-                    )
-                }
-                temp = group
-                
             }
-        }
-    })
+        })
+    }
+    catch(err){
+        console.log(err.message)
+    }
     
     return (
         <div style={{display:props.showchat?"block":"none"}} className={props.toggle?"chat-layout chat-show":"chat-layout-small chat-hide"} >
@@ -100,4 +105,7 @@ function Chat(props){
     )
 }
 
-export default Chat
+export default connect(
+    null,
+    { actions }
+)(Chat);

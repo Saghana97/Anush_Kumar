@@ -23,7 +23,7 @@ function loginApp(state = [], action) {
       ]
       case "SIGNUP_AUTH":
       return [
-        {
+        { 
           name: action.signUpDetails.name,
           userName: action.signUpDetails.userName,
           email: action.signUpDetails.email,
@@ -70,11 +70,11 @@ function setFriendsForUser(state = [], action){
   }
 }
 
-function setSearchFriends(state = [], action){
+function setThread(state = [], action){
   switch(action.type){
-    case "ADD_SEARCH":
+    case "ADD_THREAD":
         return [
-          { details:action.friends }
+          { thread: action.details }
         ]
     default:
       return state
@@ -87,7 +87,7 @@ const reducer = combineReducers({
   setFriends,
   setFriendsRequsts,
   setFriendsForUser,
-  setSearchFriends
+  setThread
 })
 
 export default reducer

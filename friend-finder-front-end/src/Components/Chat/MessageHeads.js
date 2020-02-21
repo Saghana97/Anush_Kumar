@@ -1,12 +1,14 @@
 import React from 'react'
 import openSocket from 'socket.io-client';
+import store from '../../Controllers/Store/store'
+import * as actions from '../../Controllers/Actions/Actions'
+import Chat from './Chat';
 
 function MessageHead(props) {
-    const socket = openSocket('http://localhost:5000');
     function setName(){
         props.onclick()
         props.setname(props.name,props.id)
-        socket.emit('setUsername', {key:sessionStorage.getItem('key'),id:props.id});
+        props.callToChat(sessionStorage.getItem('key'),props.id,"",false)
     }
     
     return (

@@ -15,7 +15,7 @@ import FriendRecomendationLoader from '../Loaders/FriendRecomendationLoader'
 import FriendLoader from '../Loaders/FriendLoader'
 
 
-function Home(){
+function Home(props){
     const history = useHistory()
     const [name,setName] = useState("");
     const [imgUrl,setImgUrl] = useState("");
@@ -38,7 +38,7 @@ function Home(){
                 }
                 if(res.data.message === "Cannot read property 'toString' of null"){
                     sessionStorage.clear()
-                    history.push('/');
+                    history.push('/'); 
                 }
                 // console.log(res.data)
                 store.dispatch(actions.addUserName(res.data.user))
@@ -169,8 +169,9 @@ function Home(){
                     <div className="home-main-content">
                         <div className="home-friends">
                             <p>Friends</p>
-                            <div>
-                                {loadFriends()}
+                            {loadFriends()}
+                            <div className="friend-requests-footer">
+                                <p>see all</p>
                             </div>
                         </div>
                         <div className="home-people-you-may-know">
@@ -193,8 +194,11 @@ function Home(){
         </div>
     )
 }
+function mapstatetoprops(state){
+    return {state}
+}
 
 export default connect(
-    null,
+    mapstatetoprops,
     { actions }
 )(Home);

@@ -1,12 +1,15 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useCallback} from 'react'
 import axios from 'axios'
 import Chat from '../Chat/Chat'
 import setImages from '../../ProfileImagesPath'
 import Loader from '../Loaders/ChatLoader'
 import MessageHeads from "./MessageHeads";
 import openSocket from 'socket.io-client';
+import store from '../../Controllers/Store/store'
+import { connect } from 'react-redux';
+import * as actions from '../../Controllers/Actions/Actions'
 
-function MessageHeadCollection(){
+function MessageHeadCollection(props){
     const socket = openSocket('http://localhost:5000');
     const [chatHead,setChatHead] = useState([])
     const [messageHead,setMessageHead] = useState([])
@@ -18,31 +21,51 @@ function MessageHeadCollection(){
         name:"",
         id:""
     })
+    const [flag,setFlag] = useState(false);
+
+    function callToChat(key,id,message,isChat){
+        if(isChat){
+            socket.emit('join_to_chat', {key,id,message,isChat})  
+            socket.on("new_msg", function(data) {
+                // console.log(data);
+                let renderNow;
+                setChatHead(prev=>{
+                    prev.map(items=>{
+                        for(let i in data){
+                            if(items.id === data[i].id){
+                                items.messages = data[i].messages
+                            }
+                        }
+                    })
+                    renderNow = prev
+                    prev = ""
+                    return prev
+                })
+                setChatHead(prev=>{
+                    prev = renderNow
+                    return prev
+                })
+                console.log(chatHead)
+            })
+        }
+        else{
+            socket.emit('join_to_chat', {key,id,isChat})
+        }
+    }
+    function chat(key,id,message,isChat){
+        // console.log(props.state.setThread[0].thread,message)
+        
+    }
 
     useEffect(() => {
         var isLoad = true
         async function getData() {
-            socket.on('userSet', function(data) {
-                let user = data;
-                console.log(user)
-            });
-            // socket.emit("get_data",[sessionStorage.getItem('key')])
-            // socket.on("messageSet",(sample)=>{
-            //     console.log(sample)
-            //     setMessageHead(prev=>{
-            //         prev=sample
-            //         return prev
-            //     })
-            // })
+            
             await axios.post('http://localhost:4000/send-friend-request/chat-heads',[sessionStorage.getItem('key')])
             .then(res=>{
                 console.log(res.data)
                 if(isLoad){
                     setChatHead(prev=>{
-                        prev=res.data
-                        return prev
-                    })
-                    setMessageHead(prev=>{
                         prev=res.data
                         return prev
                     })
@@ -71,7 +94,7 @@ function MessageHeadCollection(){
                 if(setImages[i].name === items.threadDetails['profileImageUrl'])
                     imge = setImages[i].src
             }
-            return <MessageHeads key={items.threadDetails.id} id={items.threadDetails.id} onclick={openChat} setname={setName} name={items.threadDetails['userName']} img={imge}/>
+            return <MessageHeads key={items.threadDetails.id} id={items.threadDetails.id} callToChat={callToChat} chat={chat} onclick={openChat} setname={setName} name={items.threadDetails['userName']} img={imge}/>
         })
     }
     catch(err){
@@ -119,10 +142,15 @@ function MessageHeadCollection(){
                 <p className="message-chat-heads-p">contacts</p>
                 {loadContent()}
             </div>
-            <Chat showchat={showChat} toggle={toggle} setToggle={handleToggle} setchat={handleChat} name={chatDetails.name} messages={messageHead} details={chatDetails}/>
+            <Chat showchat={showChat} toggle={toggle} setToggle={handleToggle} setchat={handleChat} name={chatDetails.name} messages={chatHead} chat={callToChat} details={chatDetails}/>
         </div>
         
     )
 }
-
-export default MessageHeadCollection
+function mapstatetoprops(state){
+    return {state}
+}
+export default connect(
+    mapstatetoprops,
+    { actions }
+)(MessageHeadCollection);
