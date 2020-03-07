@@ -1,17 +1,11 @@
 import React,{useEffect,useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import Maps from './Maps'
-import { usePosition } from 'use-position';
 
 export default function Home (){
-    const { latitude, longitude, timestamp, accuracy, error } = usePosition(false, {enableHighAccuracy: true});
     const [name,setName] = useState("");
     const history = useHistory();
-    const[loading,setLoading] = useState(true)
-    const [routes,setRoutes] = useState({
-        routeOne:[],
-        routeTwo:[]
-    });
+    const [loading,setLoading] = useState(true)
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem("token"));
         const users = JSON.parse(localStorage.getItem('Users'));
@@ -33,7 +27,7 @@ export default function Home (){
         setTimeout(() => {
             setLoading(prev=>prev=false)
         }, 2000);
-    }, [])
+    }, [history])
 
     function loadData(){
         if(loading)
