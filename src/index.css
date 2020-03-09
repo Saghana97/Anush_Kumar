@@ -226,7 +226,8 @@ code {
   z-index: 10;
   background-color: white;
   height: 100vh;
-  width: 15vw;
+  width: 30vw;
+  overflow: hidden;
   border-right: 1px solid rgba(128, 128, 128, 0.178);
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
@@ -255,4 +256,22 @@ p{
 }
 .logout-section p:hover{
   color: black;
+}
+.show-details{
+	overflow: auto;
+	max-height: 85vh;
+	padding: 10px;
+	font-size: 13px;
+}
+.show-details p{
+	margin-top: 15px;
+}
+.safe-span{
+	color: rgb(0, 207, 0);
+}
+.normal-span{
+	color: dodgerBlue;
+}
+.danger-span{
+	color: red;
 }

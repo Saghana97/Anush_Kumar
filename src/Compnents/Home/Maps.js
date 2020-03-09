@@ -10,7 +10,7 @@ const KEY ="AoVMH4fhTFyAXxfjqNVBvLYjGjOxCYN8llWIud4Ro0CgtJ_2b379XxIP3XZsEmT1";
 const CAR = "CAR"
 const PUBLIC_TRANSPORT = "PUBLIC_TRANSPORT"
 
-export default function Map() {
+export default function Map(props) {
     const latLong = [11.790640708130752, 78.09182189856892]   
     const [cars,setCars] = useState([11.0018115,76.9628425])
     const [buss,setBuss] = useState([13.0801721,79.2838331])
@@ -94,12 +94,43 @@ export default function Map() {
     function hoverOnSecond(){
         setTwo(prev=>prev=!prev);
     }
-
+    function secondsToTime(secs) {
+        var hours = Math.floor(secs / (60 * 60));
+    
+        var divisor_for_minutes = secs % (60 * 60);
+        var minutes = Math.floor(divisor_for_minutes / 60);
+    
+        var divisor_for_seconds = divisor_for_minutes % 60;
+        var seconds = Math.ceil(divisor_for_seconds);
+    
+        var obj = {
+            "h": hours,
+            "m": minutes,
+            "s": seconds
+        };
+        if(hours>1)
+            if(minutes > 1)
+                return hours+" hrs "+minutes+" mins"
+            else
+                return hours+" hrs "+minutes+" min"
+        else if(hours < 1)
+            if(minutes>1)
+                return minutes+" mins"
+            else
+                return minutes+" min"
+        else if(hours === 1)
+            if(minutes > 1)
+                return hours+" hr "+minutes+" mins"
+            else
+                return hours+" hr "+minutes+" min"
+    }
     async function getRoute(data,mode){
         if(mode === CAR){
-            await axios.get(`https://route.ls.hereapi.com/routing/7.2/calculateroute.json?waypoint0=${gps[0]}%2C${gps[1]}&waypoint1=${data[0]}%2C${data[1]}&mode=fastest%3Bcar%3Btraffic%3Aenabled&departure=now&apiKey=${HERE_MAPS_KEY}`)
+            await axios.get(`https://route.ls.hereapi.com/routing/7.2/calculateroute.json?waypoint0=${gps[0]}%2C${gps[1]}&waypoint1=${data[0]}%2C${data[1]}&mode=fastest%3Bcar%3Btraffic%3Aenabled&departure=now&alternatives=1&apiKey=${HERE_MAPS_KEY}`)
             .then(res=>{
                 setRoutes([])
+                console.log(res.data.response.route)
+                props.method([{trafficTime:secondsToTime(res.data.response.route[0].summary.trafficTime), baseTime:secondsToTime(res.data.response.route[0].summary.baseTime), distance:res.data.response.route[0].summary.distance}])
                 res.data.response.route[0].leg[0].maneuver.map(items=>{
                     setRoutes(prev=>{
                         prev.push([items.position.latitude,items.position.longitude])
@@ -113,9 +144,11 @@ export default function Map() {
             })
         }
         if(mode === PUBLIC_TRANSPORT){
-            await axios.get(`https://route.ls.hereapi.com/routing/7.2/calculateroute.json?waypoint0=${gps[0]}%2C${gps[1]}&waypoint1=${data[0]}%2C${data[1]}&mode=fastest%3Btruck%3Btraffic%3Aenabled&departure=now&apiKey=${HERE_MAPS_KEY}`)
+            await axios.get(`https://route.ls.hereapi.com/routing/7.2/calculateroute.json?waypoint0=${gps[0]}%2C${gps[1]}&waypoint1=${data[0]}%2C${data[1]}&mode=fastest%3Btruck%3Btraffic%3Aenabled&departure=now&alternatives=1&apiKey=${HERE_MAPS_KEY}`)
             .then(res=>{
                 setRoutes([])
+                console.log(res.data.response.route)
+                props.method([{trafficTime:secondsToTime(res.data.response.route[0].summary.trafficTime), baseTime:secondsToTime(res.data.response.route[0].summary.baseTime), distance:res.data.response.route[0].summary.distance}])
                 res.data.response.route[0].leg[0].maneuver.map(items=>{
                     setRoutes(prev=>{
                         prev.push([items.position.latitude,items.position.longitude])
@@ -131,7 +164,7 @@ export default function Map() {
         
     }
     return (
-        <div style={{width:"85vw",height:"100vh"}}>
+        <div style={{width:"70vw",height:"100vh"}}>
             <ReactBingmaps 
             bingmapKey = {KEY}
             center = {latLong}
@@ -152,10 +185,12 @@ export default function Map() {
                     }
                 ]
             }
-            polyline = {{
-                "location": routes,
-                "option": { strokeColor: 'dodgerBlue', strokeThickness: 5}
-            }}
+            polyline = {
+                {
+                    "location": routes,
+                    "option": { strokeColor: 'dodgerBlue', strokeThickness: 5}
+                }
+            }
             getLocation = {
                 {addHandler: "click", callback:addPushPinOnClick}
             }

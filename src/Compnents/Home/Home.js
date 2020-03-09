@@ -1,37 +1,38 @@
-import React,{useEffect,useState} from 'react'
-import {useHistory} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import Maps from './Maps'
 
-export default function Home (){
-    const [name,setName] = useState("");
+export default function Home() {
+    const [name, setName] = useState("");
     const history = useHistory();
-    const [loading,setLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
+    const [estimate, setEstimate] = useState(["no estimate"]);
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem("token"));
         const users = JSON.parse(localStorage.getItem('Users'));
         // console.log(token)
-        if(token){
-            const currentUser = users.filter(items=>{
+        if (token) {
+            const currentUser = users.filter(items => {
                 return items.userName === token.token
             })
-            if(currentUser.length>0){
+            if (currentUser.length > 0) {
                 setName(token.name)
             }
-            else if(currentUser.length<0){
+            else if (currentUser.length < 0) {
                 history.push("/")
             }
         }
-        else{
+        else {
             history.push("/")
         }
         setTimeout(() => {
-            setLoading(prev=>prev=false)
+            setLoading(prev => prev = false)
         }, 2000);
     }, [history])
 
-    function loadData(){
-        if(loading)
-            return(
+    function loadData() {
+        if (loading)
+            return (
                 <div className="loader">
                     <div className="cssload-thecube">
                         <div className="cssload-cube cssload-c1"></div>
@@ -42,17 +43,25 @@ export default function Home (){
                 </div>
             )
         else
-            return(
+            return (
                 <div className="main-content">
                     <div className="left-section">
                         <div className="name-section">
                             <p>{name}</p>
                         </div>
+                        <div>
+                            {estimate[0] === "no estimate"
+                                ? <div className="show-details">Select a route to display realtime info.</div>
+                                : <div className="show-details"><p>Total distance of trip <br/><span className="normal-span">{estimate[0].distance/1000+" kms"}</span></p><p>Estimated reaching time with Traffice: <br/><span className="danger-span">{estimate[0].trafficTime}</span></p><p>Estimated time without traffic: <br/><span className="safe-span">{estimate[0].baseTime}</span></p></div>}
+                        </div>
+                        <div className="show-details" id="itineraryContainer">
+
+                        </div>
                         <div className="logout-section">
-                            <p onClick={()=>{localStorage.removeItem("token");history.push("/")}}>Log out</p>
+                            <p onClick={() => { localStorage.removeItem("token"); history.push("/") }}>Log out</p>
                         </div>
                     </div>
-                    <Maps />
+                    <Maps method={setEstimate} />
                 </div>
             )
     }
