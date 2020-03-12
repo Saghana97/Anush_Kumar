@@ -20,7 +20,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://anushkumar629.netlify.com">
-        Maps
+        Map.io
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -133,7 +133,7 @@ export default function SignIn() {
             label="Email Address or User Name"
             name="userId"
             onChange={handleLoginDetails}
-            autoComplete="email"
+            autoComplete="off"
             autoFocus
           />
           <TextField
@@ -147,7 +147,7 @@ export default function SignIn() {
             type="password"
             onChange={handleLoginDetails}
             id="password"
-            autoComplete="current-password"
+            autoComplete="off"
           />
           <Button
             type="submit"

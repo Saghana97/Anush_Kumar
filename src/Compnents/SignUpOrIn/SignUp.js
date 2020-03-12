@@ -22,7 +22,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://anuskumar629.netlify.com">
-        Maps
+        Map.io
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -203,7 +203,7 @@ export default function SignUp() {
                         onChange={setAuthDetails} 
                         onBlur={checkAuthDetails}
                         value={userDetails.name}             
-                        autoComplete="fname"
+                        autoComplete="off"
                         name="name"
                         variant="outlined"
                         required
@@ -224,7 +224,7 @@ export default function SignUp() {
                         id="userName"
                         label="User Name"
                         name="userName"
-                        autoComplete="lname"
+                        autoComplete="off"
                     />
                     </Grid>
                     <Grid item xs={12}>
@@ -238,7 +238,7 @@ export default function SignUp() {
                         id="email"
                         label="Email Address"
                         name="email"
-                        autoComplete="email"
+                        autoComplete="off"
                     />
                     </Grid>
                     <Grid item xs={12}>
@@ -253,7 +253,7 @@ export default function SignUp() {
                         label="Password"
                         type="password"
                         id="password"
-                        autoComplete="current-password"
+                        autoComplete="off"
                     />
                     </Grid>
                 </Grid>

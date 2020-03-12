@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback} from 'react';
 import { useHistory } from 'react-router-dom';
-import Maps from './Maps';
 import MapsWithDirections from './MapsWithDirections';
 import EmptyMap from './EmptyMap'
 import Axios from 'axios';
@@ -13,7 +12,6 @@ export default function Home() {
     const history = useHistory();
     const [loading, setLoading] = useState(true)
     const [flag,setFlag] = useState(false)
-    const [estimate, setEstimate] = useState(["no estimate"]);
     const [dest,setDest] = useState({
         start: "",
         end: ""

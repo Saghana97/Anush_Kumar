@@ -6,7 +6,7 @@ export default function BeforeHome(){
     return (
         <div className="before-main-content">
             <p onClick={()=>{localStorage.removeItem("token");history.push("/")}} className="logout">Sign out</p>
-            <h1 className="h1">Welcome to Maps</h1>
+            <h1 className="h1">Welcome to Map.io</h1>
             <div className="before-main-content-block">
                 <div onClick={()=>{history.push("/home/realtime")}} className="left-block">
                     <p>Maps with realtime info</p>
