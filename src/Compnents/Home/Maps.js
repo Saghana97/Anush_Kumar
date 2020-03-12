@@ -21,6 +21,7 @@ export default function Map(props) {
 
     useEffect(() => {
         // console.log(cars)
+        //enable the below to get cars moving
         if(cars[0]<12){
             setCars([cars[0]+0.00003,cars[1]+0.000002])
             setBuss([buss[0]-0.00003,buss[1]-0.000002])
@@ -94,6 +95,7 @@ export default function Map(props) {
     function hoverOnSecond(){
         setTwo(prev=>prev=!prev);
     }
+
     function secondsToTime(secs) {
         var hours = Math.floor(secs / (60 * 60));
     
@@ -103,11 +105,6 @@ export default function Map(props) {
         var divisor_for_seconds = divisor_for_minutes % 60;
         var seconds = Math.ceil(divisor_for_seconds);
     
-        var obj = {
-            "h": hours,
-            "m": minutes,
-            "s": seconds
-        };
         if(hours>1)
             if(minutes > 1)
                 return hours+" hrs "+minutes+" mins"
@@ -124,6 +121,7 @@ export default function Map(props) {
             else
                 return hours+" hr "+minutes+" min"
     }
+
     async function getRoute(data,mode){
         if(mode === CAR){
             await axios.get(`https://route.ls.hereapi.com/routing/7.2/calculateroute.json?waypoint0=${gps[0]}%2C${gps[1]}&waypoint1=${data[0]}%2C${data[1]}&mode=fastest%3Bcar%3Btraffic%3Aenabled&departure=now&alternatives=1&apiKey=${HERE_MAPS_KEY}`)
@@ -161,10 +159,10 @@ export default function Map(props) {
                 console.log(err.message)
             })
         }
-        
     }
+
     return (
-        <div style={{width:"70vw",height:"100vh"}}>
+        <div style={{width:"85vw",height:"100vh"}}>
             <ReactBingmaps 
             bingmapKey = {KEY}
             center = {latLong}
@@ -197,6 +195,6 @@ export default function Map(props) {
             
         > 
         </ReactBingmaps>
-        </div>
+    </div>
     )
 }

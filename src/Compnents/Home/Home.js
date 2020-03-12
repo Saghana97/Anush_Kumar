@@ -1,12 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import Maps from './Maps'
+import React, { useEffect, useState, useCallback} from 'react';
+import { useHistory } from 'react-router-dom';
+import Maps from './Maps';
+import MapsWithDirections from './MapsWithDirections';
+import EmptyMap from './EmptyMap'
+import Axios from 'axios';
+
+
+const BING_MAPS_KEY ="AoVMH4fhTFyAXxfjqNVBvLYjGjOxCYN8llWIud4Ro0CgtJ_2b379XxIP3XZsEmT1";
 
 export default function Home() {
     const [name, setName] = useState("");
     const history = useHistory();
     const [loading, setLoading] = useState(true)
+    const [flag,setFlag] = useState(false)
     const [estimate, setEstimate] = useState(["no estimate"]);
+    const [dest,setDest] = useState({
+        start: "",
+        end: ""
+    });
+    const [latLong,setLatLong] = useState([])
+    const [latLongI,setLatLongI] = useState([])
+    const [optionStart,setOptionStart] = useState("")
+    const [optionEnd,setOptionEnd] = useState("")
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem("token"));
         const users = JSON.parse(localStorage.getItem('Users'));
@@ -29,6 +44,150 @@ export default function Home() {
             setLoading(prev => prev = false)
         }, 2000);
     }, [history])
+    //flag change
+    const renderMaps = useCallback(
+        () => {
+            if(flag){
+                let points= [];
+                if(latLong.length < 1){
+                    console.log("no lat long")
+                    if(latLongI.length > 1 ){
+                        console.log("latlongI avail")
+                        points = [
+                            {
+                                "location": flag?latLongI:""
+                            },
+                            {
+                                address: flag?dest.end:""
+                            }
+                        ]
+                    }
+                    else
+                        points = [
+                            {
+                                address: flag?dest.start:""
+                            },
+                            {
+                                address: flag?dest.end:""
+                            }
+                        ]
+                }
+                else if(latLong.length > 1){
+                    console.log("latlong avail",flag,latLong)
+                    if(latLongI.length > 1 ){
+                        console.log("latlongI avail")
+                        points = [
+                            {
+                                "location": flag?latLongI:""
+                            },
+                            {
+                                "location": flag?latLong:""
+                            }
+                        ]
+                    }
+                    else 
+                        points = [
+                            {
+                                address: flag?dest.start:""
+                            },
+                            {
+                                "location": flag?latLong:""
+                            }
+                        ]
+                    // console.log(points)
+                }
+                return <MapsWithDirections setflag={setFlag} dest={points} setDestination={setDest} setDest={setLatLong} source={latLongI} setDest2={setLatLongI}/>
+            }
+            else   
+                return <EmptyMap  setDest={setLatLong}/>
+        },
+        [flag,dest],
+    )
+    const renderRoute = useCallback(
+        () => {
+            if(flag)
+                return <div className="show-details" id="itineraryContainer"></div>
+            else
+                return <p></p>
+        },
+        [flag],
+    )
+    function handleChange(event){
+        event.persist();
+        setFlag(false)
+        setOptionStart("")
+        setOptionEnd("")
+        setDest(prev=>{
+            prev[event.target.name] = event.target.value;
+            return prev
+        })
+        setTimeout(() => {
+            if(dest.start.length > 0 && event.target.name === "start")
+                Axios.get(`http://dev.virtualearth.net/REST/v1/Autosuggest?query=${dest.start}&includeEntityTypes=place&maxResults=10&key=${BING_MAPS_KEY}`)
+                .then(res=>{
+                    // console.log(res.data.resourceSets[0].resources[0].value)
+                    setOptionStart(res.data.resourceSets[0].resources[0].value)
+                })
+            if(dest.end.length > 0 && event.target.name === "end")
+                Axios.get(`http://dev.virtualearth.net/REST/v1/Autosuggest?query=${dest.end}&includeEntityTypes=place&maxResults=10&key=${BING_MAPS_KEY}`)
+                .then(res=>{
+                    // console.log(res.data.resourceSets[0].resources[0].value)
+                    // setLatLong([])
+                    setOptionEnd(res.data.resourceSets[0].resources[0].value)
+                })
+            // console.log(dest)
+        }, 10);
+    }
+
+    function setStartDest(event){
+        event.persist()
+        // console.log(event.target.innerHTML)
+        setDest(prev=>{
+            prev.start = event.target.innerHTML
+            return prev
+        })
+        setOptionStart("")
+    }
+    function setEndDest(event){
+        event.persist()
+        setDest(prev=>{
+            prev.end = event.target.innerHTML
+            return prev
+        })
+        setOptionEnd("")
+    }
+
+    let optionStartList;
+    try{
+        let i=0
+        optionStartList = optionStart.map(items=>{
+            i++
+            return  <li onClick={setStartDest} key={i}>
+                        {items.address.formattedAddress}
+                    </li>
+        })
+    }
+    catch(err){
+        // console.log(err.message)
+    }
+
+    let optionEndList;
+    try{
+        let i=0
+        optionEndList = optionEnd.map(items=>{
+            i++
+            return  <li onClick={setEndDest} key={i}>
+                        {items.address.formattedAddress}
+                    </li>
+        })
+    }
+    catch(err){
+        // console.log(err.message)
+    }
+
+    function searchDirection(){
+        setFlag(true)
+    }
 
     function loadData() {
         if (loading)
@@ -49,19 +208,18 @@ export default function Home() {
                         <div className="name-section">
                             <p>{name}</p>
                         </div>
-                        <div>
-                            {estimate[0] === "no estimate"
-                                ? <div className="show-details">Select a route to display realtime info.</div>
-                                : <div className="show-details"><p>Total distance of trip <br/><span className="normal-span">{estimate[0].distance/1000+" kms"}</span></p><p>Estimated reaching time with Traffice: <br/><span className="danger-span">{estimate[0].trafficTime}</span></p><p>Estimated time without traffic: <br/><span className="safe-span">{estimate[0].baseTime}</span></p></div>}
+                        <div className="search">
+                                <input name="start" type="text" onChange={handleChange} autoComplete="off" placeholder="Enter start destination" value={dest.start} />
+                                <ul className="search-out-1">{optionStartList}</ul>
+                                <input name="end" className="margin" onChange={handleChange} autoComplete="off" type="text" placeholder="Enter end destination" value={dest.end}/><button onClick={searchDirection} className="button"><i className="fa fa-search" aria-hidden="true"></i></button>
+                                <ul className="search-out-2">{optionEndList}</ul>
                         </div>
-                        <div className="show-details" id="itineraryContainer">
-
-                        </div>
+                        {renderRoute()}
                         <div className="logout-section">
                             <p onClick={() => { localStorage.removeItem("token"); history.push("/") }}>Log out</p>
                         </div>
                     </div>
-                    <Maps method={setEstimate} />
+                    {renderMaps()}
                 </div>
             )
     }

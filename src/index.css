@@ -219,6 +219,52 @@ code {
 	}
 }
 /* main content */
+.before-main-content{
+	height: 100vh;
+	width: 100vw;
+	background-color: whitesmoke;
+	text-align: left;
+}
+.before-main-content-block{
+	display: flex;
+	margin: 0 350px;
+}
+.left-block{
+	width: 33%;
+	padding: 10px;
+	color: white;
+	cursor: pointer;
+	background-color: tomato;
+	transition: 0.3s;
+}
+.left-block:hover{
+	transform: scale(1.2);
+}
+.middle-block{
+	padding: 10px;
+	width: 33%;
+	cursor: pointer;
+	background-color: white;
+	transition: 0.3s;
+}
+.middle-block:hover{
+	transform: scale(1.2);
+}
+.right-block{
+	padding: 10px;
+	width: 33%;
+	color: white;
+	cursor: pointer;
+	background-color: green;
+	transition: 0.3s;
+}
+.right-block:hover{
+	transform: scale(1.2);
+}
+.h1{
+	margin: 0;
+	padding: 10vh;
+}
 .main-content{
   display: flex;
 }
@@ -228,22 +274,34 @@ code {
   height: 100vh;
   width: 30vw;
   overflow: hidden;
-  border-right: 1px solid rgba(128, 128, 128, 0.178);
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 .name-section{
+  background-color: dodgerblue;
+  color: whitesmoke;
   padding: 10px;
   font-size: 12px;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.178);
+  font-weight: 800;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.466);
 }
 p{
   margin: 0;
   padding: 0;
 }
+.logout{
+	cursor: pointer;
+	font-size: 13px;
+	padding: 10px;
+	position: absolute;
+	right: 0;
+	transition: 0.2s;
+}
+.logout:hover{
+	color: dodgerblue;
+}
 .logout-section{
   position: absolute;
   bottom: 0;
-  color: grey;
   font-size: 11px;
   padding: 10px;
   transition: 0.2s;
@@ -252,14 +310,15 @@ p{
   margin: 0;
   cursor: pointer;
   color: grey;
+  font-weight: 600;
   transition: 0.2s;
 }
 .logout-section p:hover{
-  color: black;
+  color: dodgerblue;
 }
 .show-details{
 	overflow: auto;
-	max-height: 85vh;
+	max-height: 70vh;
 	padding: 10px;
 	font-size: 13px;
 }
@@ -274,4 +333,102 @@ p{
 }
 .danger-span{
 	color: red;
+}
+input{
+	font-family: 'Spartan', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+	  sans-serif;
+	border: none;
+	background-color: transparent;
+	border-bottom: 1.5px solid white;
+	padding: 5px;
+	width: 200px;
+	outline: none;
+	color: white;
+}
+input::placeholder{
+	color: white;
+	font-weight: 500;
+}
+.button{
+	font-family: 'Spartan', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+	  sans-serif;
+	background-color: transparent;
+	cursor: pointer;
+	color: floralwhite;
+	margin: 0;
+	padding: 2px 2px 4px 2px;
+	border: none;
+	outline: none;
+	position: absolute;
+	top: 85px;
+	left: 204px;
+	border-bottom: 1.5px solid white;
+}
+.search{
+	background-color: dodgerblue;
+	padding: 10px;
+	height: 70px;
+}
+.margin{
+	width: 184px;
+	margin-top: 10px;
+}
+.flex-display{
+	display: flex;
+}
+ul , li {
+	margin: 0;
+	padding: 0;
+}
+.search-out-1{
+	position: absolute;
+	z-index: 1;
+	background-color: white;
+	width: 210px;
+}
+.search-out-2{
+	position: absolute;
+	top: 108px;
+	z-index: 1;
+	background-color: white;
+	width: 210px;
+}
+.search-out-1 li{
+	font-size: 13px;
+	padding: 10px;
+	border-bottom: 0.5px solid rgba(0, 0, 0, 0.151);
+	cursor: pointer;
+	transition: 0.2s;
+}
+.search-out-2 li{
+	font-size: 13px;
+	padding: 10px;
+	border-bottom: 0.5px solid rgba(0, 0, 0, 0.151);
+	cursor: pointer;
+	transition: 0.2s;
+}
+.search-out-1 li:hover{
+	background-color: rgba(0, 0, 0, 0.123);
+}
+.search-out-2 li:hover{
+	background-color: rgba(0, 0, 0, 0.123);
+}
+.p-short{
+	font-size: 11px;
+	color: steelblue;
+}
+.overlay{
+	color: floralwhite;
+	padding: 10px;
+	top: -50px;
+	font-weight: 600;
+	border-radius: 3px;
+	left: 60vw;
+	position: absolute;
+	background-color: tomato;
+	z-index: 10000 !important;
+	transition: top 0.2s;
+}
+.visible{
+	top: 10px;
 }
