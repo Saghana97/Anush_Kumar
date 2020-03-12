@@ -147,8 +147,7 @@ export default function SignIn() {
             type="password"
             onChange={handleLoginDetails}
             id="password"
-            autoComplete="off
-            "
+            autoComplete="off"
           />
           <Button
             type="submit"
